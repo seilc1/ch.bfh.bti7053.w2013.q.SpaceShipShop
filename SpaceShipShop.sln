@@ -3,6 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceShipShop", "SpaceShipShop\SpaceShipShop.csproj", "{7F077E92-3040-4F74-ACE6-1769582B9D92}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{DAFDA8D0-1C1C-4FA6-A9A5-FE072F2A0D24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prototype", "Prototype", "{3638E763-ADBF-4DB6-B820-8352F8464420}"
+	ProjectSection(SolutionItems) = preProject
+		Doc\Prototype\Prototype.html = Doc\Prototype\Prototype.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3638E763-ADBF-4DB6-B820-8352F8464420} = {DAFDA8D0-1C1C-4FA6-A9A5-FE072F2A0D24}
 	EndGlobalSection
 EndGlobal
