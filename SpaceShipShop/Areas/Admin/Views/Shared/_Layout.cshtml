@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Admin-Area @ViewBag.Title</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/Content/shop.less">
+		@Scripts.Render("~/bundles/jquery")
+		@RenderSection("scripts", required: false)
+	</head>
+	<body>
+		<div class="pillar">
+			<div class="navigation top-navigation">
+				<ul class="clearfix">
+					<li>
+						@Html.ActionLink("Users", "Index", "User")
+					</li>
+					<li>
+						@Html.ActionLink("ShopItems", "Index", "ShopItem")
+					</li>
+					<li>
+						@Html.ActionLink("ShopItem Attributes", "Index", "ShopItemAttributeType")
+					</li>
+				</ul>
+			</div>
+
+			<div class="col-container">
+				<div class="col">
+					@RenderBody()
+				</div>
+				
+				<div class="col sidebar">
+					<div class="slider"></div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script src="/Scripts/shop/display.js"></script>
+		
+		<script>
+			$(function() {
+				new SpaceShop.Display();
+			});
+		</script>
+	</body>
+</html>

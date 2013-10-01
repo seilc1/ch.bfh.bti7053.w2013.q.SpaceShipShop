@@ -1,0 +1,51 @@
+﻿@model SpaceShipShop.Models.ShopItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ShopItem</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Price)
+	</div>
+	
+	<div class="display-label">@Html.DisplayFor(model => model.Attributes)</div>
+	<div class="display-field">
+		<ul>
+			@if (Model.Attributes != null)
+			{
+				foreach (var attribute in Model.Attributes)
+				{
+					<li>@attribute.AttributeType.Name :: @attribute.Value</li>
+				}
+			}
+		</ul>
+		
+		
+	</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,8 +1,8 @@
 ﻿@shop-width: 1024px;
 @content-open-width: 1000px;
-@content-shared-width: 800px;
+@content-shared-width: 700px;
 @sidebar-closed-width: 24px;
-@sidebar-shared-width: 224px;
+@sidebar-shared-width: 324px;
 
 .not-selectable()
 {
@@ -14,6 +14,13 @@
 body
 {
     background-color: #E8E8E8;
+
+    a {
+        color: #000;
+        text-decoration: underline;
+
+        &:hover { text-decoration: none; }
+    }
 }
 
 
@@ -38,12 +45,12 @@ body
             height: 100%;
             width: @content-shared-width;
 
-            background-color: green;
+            background-color: #F5F5F5;
 
             &.sidebar
             {
                 width: @sidebar-shared-width;
-                background-color: red;
+                background-color: #DEDEDE;
             }
 
             .slider
@@ -82,6 +89,33 @@ body
 {
     &.top-navigation
     {
-        height: 40px;
+        padding: 2px;
+    }
+
+
+    ul
+    {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+
+        li {
+            float: left;
+            padding: 4px 10px;
+            margin-left: 2px;
+
+            background-color: #CFCFCF;
+
+            &:first-child { margin-left: 0px; }
+        }
+
+    }
+}
+
+fieldset
+{
+    .display-label
+    {
+        font-weight: bold;
     }
 }

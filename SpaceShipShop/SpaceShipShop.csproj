@@ -129,14 +129,60 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ShopItemAttributeTypeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ShopItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StartController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310011525254_InitialCreate.cs" />
+    <Compile Include="Migrations\201310011525254_InitialCreate.Designer.cs">
+      <DependentUpon>201310011525254_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310011634242_DataContext.cs" />
+    <Compile Include="Migrations\201310011634242_DataContext.Designer.cs">
+      <DependentUpon>201310011634242_DataContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310011645442_DataContext1.cs" />
+    <Compile Include="Migrations\201310011645442_DataContext1.Designer.cs">
+      <DependentUpon>201310011645442_DataContext1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\shop.css">
+      <DependentUpon>shop.less</DependentUpon>
+    </Content>
+    <Content Include="Content\shop.min.css">
+      <DependentUpon>shop.less</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
+    <Content Include="Content\shop.less" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Start\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItem\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItem\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItem\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItem\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItem\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItemAttributeType\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItemAttributeType\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItemAttributeType\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItemAttributeType\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItemAttributeType\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap\affix.js" />
     <Content Include="Scripts\bootstrap\alert.js" />
@@ -164,6 +210,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\shop\display.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -180,11 +227,28 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpaceShipShop.Models\SpaceShipShop.Models.csproj">
+      <Project>{39054145-dcdd-4bb3-97df-b26d19d2adae}</Project>
+      <Name>SpaceShipShop.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201310011525254_InitialCreate.resx">
+      <DependentUpon>201310011525254_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310011634242_DataContext.resx">
+      <DependentUpon>201310011634242_DataContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310011645442_DataContext1.resx">
+      <DependentUpon>201310011645442_DataContext1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

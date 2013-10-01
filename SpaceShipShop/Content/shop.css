@@ -1,6 +1,13 @@
 ﻿body {
   background-color: #E8E8E8;
 }
+body a {
+  color: #000;
+  text-decoration: underline;
+}
+body a:hover {
+  text-decoration: none;
+}
 .pillar {
   width: 1024px;
   margin: 0px auto;
@@ -16,12 +23,12 @@
   margin: 0px;
   padding: 0px;
   height: 100%;
-  width: 800px;
-  background-color: green;
+  width: 700px;
+  background-color: #F5F5F5;
 }
 .pillar .col-container .col.sidebar {
-  width: 224px;
-  background-color: red;
+  width: 324px;
+  background-color: #DEDEDE;
 }
 .pillar .col-container .col .slider {
   border: 1px solid #808080;
@@ -45,5 +52,22 @@
   width: 24px;
 }
 .navigation.top-navigation {
-  height: 40px;
+  padding: 2px;
+}
+.navigation ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.navigation ul li {
+  float: left;
+  padding: 4px 10px;
+  margin-left: 2px;
+  background-color: #CFCFCF;
+}
+.navigation ul li:first-child {
+  margin-left: 0px;
+}
+fieldset .display-label {
+  font-weight: bold;
 }

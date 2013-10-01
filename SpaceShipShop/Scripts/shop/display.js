@@ -2,10 +2,13 @@
 
 SpaceShop.Display = function() {
 
-	var heightScaler = function() {
+	var heightScaler = function ()
+	{
+		var topNavHeight = $(".top-navigation").height();
+
 		$(".pillar").css("height", $(window).height());
-		$(".col-container").css("height", $(window).height() - 40);
-		$(".col-container .slider").css("margin-top", ($(window).height() - 40 - 40) / 2);
+		$(".col-container").css("height", $(window).height() - topNavHeight);
+		$(".col-container .slider").css("margin-top", ($(window).height() - topNavHeight - 40) / 2);
 	};
 
 	var sliderHandler = function ()
