@@ -134,6 +134,7 @@
     <Compile Include="Areas\Admin\Controllers\ShopItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\StartController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\ShopItemAttributeModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -150,6 +151,10 @@
     <Compile Include="Migrations\201310011645442_DataContext1.cs" />
     <Compile Include="Migrations\201310011645442_DataContext1.Designer.cs">
       <DependentUpon>201310011645442_DataContext1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310081730055_PreCss.cs" />
+    <Compile Include="Migrations\201310081730055_PreCss.Designer.cs">
+      <DependentUpon>201310081730055_PreCss.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +188,8 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItem\AddAttribute.cshtml" />
+    <Content Include="Areas\Admin\Views\ShopItem\EditAttribute.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap\affix.js" />
     <Content Include="Scripts\bootstrap\alert.js" />
@@ -227,7 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310011645442_DataContext1.resx">
       <DependentUpon>201310011645442_DataContext1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310081730055_PreCss.resx">
+      <DependentUpon>201310081730055_PreCss.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

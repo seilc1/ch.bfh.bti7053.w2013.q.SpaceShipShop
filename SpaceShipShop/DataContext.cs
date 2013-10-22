@@ -13,6 +13,8 @@ namespace SpaceShipShop
 
 		public DbSet<ShopItem> ShopItems { get; set; }
 
+		public DbSet<ShopItemAttribute> ShopItemAttributes { get; set; }
+
 		public DbSet<ShopItemAttributeType> ShopItemAttributeTypes { get; set; }
 	}
 }

@@ -2,4 +2,41 @@
     ViewBag.Title = "AddAttribute";
 }
 
-<h2>AddAttribute</h2>
+@model SpaceShipShop.Areas.Admin.Models.ShopItemAttributeModel
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+	<fieldset>
+		<legend>ShopItemAttribute</legend>
+
+		@Html.HiddenFor(model => model.ShopItemId)
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.ShopItemAttributeType)
+		</div>
+		<div class="editor-field">
+			@Html.DropDownListFor(model => model.ShopItemAttributeType, Model.AvailableAttributes.Select(attr => new SelectListItem() {Value = attr.Id.ToString(), Text = attr.Name}))
+			@Html.ValidationMessageFor(model => model.ShopItemAttributeType)
+		</div>
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Value)
+		</div>
+		<div class="editor-field">
+			@Html.TextAreaFor(model => model.Value)
+			@Html.ValidationMessageFor(model => model.Value)
+		</div>
+
+		<p>
+			<input type="submit" value="Create" />
+		</p>
+	</fieldset>
+}
+<div>
+	@Html.ActionLink("Back to Item", "Details", new { id = Model.ShopItemId })
+</div>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
