@@ -1,0 +1,12 @@
+E:\GIT\Uniques\Uniques.Library\bin\Debug\Uniques.Library.dll
+E:\GIT\Uniques\Uniques.Library\bin\Debug\Uniques.Library.pdb
+E:\GIT\Uniques\Uniques.Library\obj\Debug\Uniques.Library.csprojResolveAssemblyReference.cache
+E:\GIT\Uniques\Uniques.Library\obj\Debug\Uniques.Library.dll
+E:\GIT\Uniques\Uniques.Library\obj\Debug\Uniques.Library.pdb
+E:\GIT\Uniques\Uniques.Library\bin\Debug\Uniques.Library.dll.config
+E:\GIT\Uniques\Uniques.Library\bin\Debug\EntityFramework.dll
+E:\GIT\Uniques\Uniques.Library\bin\Debug\EntityFramework.SqlServer.dll
+E:\GIT\Uniques\Uniques.Library\bin\Debug\EntityFramework.xml
+E:\GIT\Uniques\Uniques.Library\bin\Debug\EntityFramework.SqlServer.xml
+E:\GIT\Uniques\Uniques.Library\obj\Debug\Uniques.Library.Localization.Uniques.resources
+E:\GIT\Uniques\Uniques.Library\obj\Debug\Uniques.Library.csproj.GenerateResource.Cache

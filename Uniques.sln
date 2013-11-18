@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uniques", "Uniques\Uniques.csproj", "{135501A1-87A0-4C11-B755-CCD36812DB31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uniques.Tests", "Uniques.Tests\Uniques.Tests.csproj", "{604934A0-C14E-4B50-9D02-5A6376131631}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02F3D0EB-530A-40F3-8EDC-D0144161F5C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uniques.Library", "Uniques.Library\Uniques.Library.csproj", "{E4B6E993-DF0C-46EE-8564-144C4F838608}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{135501A1-87A0-4C11-B755-CCD36812DB31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{135501A1-87A0-4C11-B755-CCD36812DB31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{135501A1-87A0-4C11-B755-CCD36812DB31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{135501A1-87A0-4C11-B755-CCD36812DB31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{604934A0-C14E-4B50-9D02-5A6376131631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604934A0-C14E-4B50-9D02-5A6376131631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604934A0-C14E-4B50-9D02-5A6376131631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604934A0-C14E-4B50-9D02-5A6376131631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4B6E993-DF0C-46EE-8564-144C4F838608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4B6E993-DF0C-46EE-8564-144C4F838608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4B6E993-DF0C-46EE-8564-144C4F838608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4B6E993-DF0C-46EE-8564-144C4F838608}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{604934A0-C14E-4B50-9D02-5A6376131631} = {02F3D0EB-530A-40F3-8EDC-D0144161F5C3}
+	EndGlobalSection
+EndGlobal

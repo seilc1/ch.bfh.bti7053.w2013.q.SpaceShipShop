@@ -1,0 +1,36 @@
+﻿<div id="body">
+    <ul data-bind="foreach: Users">
+        <li>
+            <span data-bind="text: Loginname"></span>
+            <span data-bind="text: Displayname"></span>
+            <span data-bind="text: Password"></span>
+            <span data-bind="text: Email"></span>
+        </li>
+    </ul>
+    
+    <section>
+        <ul>
+            <li>
+                <label for="loginname">Loginname</label>
+                <input id="loginname" data-bind="value: Loginname"/>
+            </li>
+            <li>
+                <label for="displayname">Displayname</label>
+                <input id="displayname" data-bind="value: Displayname"/>
+            </li>
+            <li>
+                <label for="password">Password</label>
+                <input id="password" type="password" data-bind="value: Password"/>
+            </li>
+            <li>
+                <label for="email">EMail</label>
+                <input id="email" data-bind="value: Email"/>
+            </li>
+            <li>
+                <button data-bind="click: UserLoader().SaveUser">Save User</button>
+            </li>
+        </ul>
+    </section>
+</div>
+
+@Scripts.Render("~/Scripts/uniques/users.js")
