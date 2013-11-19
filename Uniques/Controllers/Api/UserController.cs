@@ -4,46 +4,33 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using StructureMap;
+using Uniques.Library.Authentication;
 using Uniques.Library.Data;
+using Uniques.Library.Users;
 
 namespace Uniques.Controllers.Api
 {
     public class UserController : ApiController
     {
-        private UniquesDataContext _dbContext;
-
-        private UniquesDataContext DbContext
+        private UserManager UserManager
         {
-            get
-            {
-                return _dbContext ?? (_dbContext = new UniquesDataContext());
-            }
-        }
-
-        public List<User> Get()
-        {
-            return DbContext.Users.ToList();
+            get { return ObjectFactory.GetInstance<UserManager>(); }
         }
 
         public User Get(int id)
         {
-            return DbContext.Users.FirstOrDefault(u => u.Id == id);
+            return UserManager.Get(id);
         }
 
         public User Get(string displayname)
         {
-            return DbContext.Users.FirstOrDefault(u => u.Displayname == displayname);
+            return UserManager.Get(displayname);
         }
 
         public User Put([FromBody]User user)
         {
-            user.LastAction = DateTime.Now;
-            user.PasswordSalt = "Salz";
-            
-            DbContext.Users.Add(user);
-            DbContext.SaveChanges();
-
-            return user;
+            return UserManager.Add(user);
         }
     }
 }

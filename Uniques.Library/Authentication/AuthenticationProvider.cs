@@ -49,8 +49,8 @@ namespace Uniques.Library.Authentication
 
 		public string EncryptPassword(string password, out string salt)
 		{
-			byte[] saltArray, passwordArray;
-			passwordArray = EncryptPassword(password, out saltArray);
+			byte[] saltArray;
+			byte[] passwordArray = EncryptPassword(password, out saltArray);
 
 			salt = GetString(saltArray);
 			return GetString(passwordArray);

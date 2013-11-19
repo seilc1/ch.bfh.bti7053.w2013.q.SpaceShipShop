@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StructureMap.Configuration.DSL;
+using Uniques.Library.Authentication;
 using Uniques.Library.Caching;
 using Uniques.Library.Data;
+using Uniques.Library.Users;
 using Uniques.Library.Users.Attributes;
 
 namespace Uniques.Library.StructureMap
@@ -19,10 +21,15 @@ namespace Uniques.Library.StructureMap
             For<ICacheRepository>().Singleton().Add<ThreadCacheRepository>().Named("Singleton");
 
             For<UniquesDataContext>().HybridHttpOrThreadLocalScoped().Use<UniquesDataContext>();
+            For<Func<UniquesDataContext>>().Use(ctx => ctx.GetInstance<UniquesDataContext>);
 
+            For<UserManager>().Use<UserManager>();
             For<UserAttributeManager>().Singleton().Use<UserAttributeManager>()
-                .Ctor<Func<UniquesDataContext>>("dbContextGetter").Is(ctx => ctx.GetInstance<UniquesDataContext>)
                 .Ctor<ICacheRepository>("cache").Is(ctx => ctx.GetInstance<ICacheRepository>("Singleton"));
+
+            For<AuthenticationProvider>().Use<AuthenticationProvider>().Ctor<int>("saltSize").Is(20);
+            For<AuthenticationSessionProvider>().Use<AuthenticationSessionProvider>()
+                .Ctor<ICacheRepository>("cacheRepository").Is(ctx => ctx.GetInstance<ICacheRepository>("Personal"));
         }
     }
 }
