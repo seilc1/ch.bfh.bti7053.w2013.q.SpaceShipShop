@@ -1,4 +1,7 @@
-﻿namespace Uniques.Library.Caching
+﻿using System.Web;
+using System.Web.SessionState;
+
+namespace Uniques.Library.Caching
 {
     public class SessionCacheRepository : ICacheRepository
     {
