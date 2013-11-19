@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Uniques.Library.Data.UserLogin">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEACAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Data\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Uniques.Library.Data.User">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAACAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Data\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Uniques.Library.Data.CompleteUser">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Uniques.Library.Data.UserAttribute">
+    <Position X="11.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAEgAAAAAAAAIAAAAAAAACAAAAA=</HashCode>
+      <FileName>Data\UserAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Uniques.Library.Data.UserAttributeValue">
+    <Position X="8.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Data\UserAttributeValue.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="AttributeType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Uniques.Library.Data.Image">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAgAAAAAAAAAAAAAAAAAAAABAAAAAIAAAA=</HashCode>
+      <FileName>Data\Image.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Owner" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
+    <Compile Include="AuthenticationProviderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -123,6 +124,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Uniques.Library\Uniques.Library.csproj">
+      <Project>{E4B6E993-DF0C-46EE-8564-144C4F838608}</Project>
+      <Name>Uniques.Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Uniques\Uniques.csproj">
       <Project>{135501A1-87A0-4C11-B755-CCD36812DB31}</Project>
       <Name>Uniques</Name>
