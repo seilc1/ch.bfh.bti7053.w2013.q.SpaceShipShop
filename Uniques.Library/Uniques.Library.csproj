@@ -54,10 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AuthenticationProvider.cs" />
     <Compile Include="Caching\HttpContextCacheRepository.cs" />
     <Compile Include="Caching\ICacheRepository.cs" />
     <Compile Include="Caching\SessionCacheRepository.cs" />
     <Compile Include="Caching\ThreadCacheRepository.cs" />
+    <Compile Include="Data\Image.cs" />
     <Compile Include="Data\UniquesDataContext.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Data\UserAttribute.cs" />
@@ -78,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\DataDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
