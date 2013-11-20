@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Routing;
 
 namespace Uniques
 {
@@ -9,11 +10,15 @@ namespace Uniques
     {
         public static void Register(HttpConfiguration config)
         {
-            config.Routes.MapHttpRoute(
+            config.Routes.MapHttpRoute(name: "User Image", routeTemplate: "api/user/{id}/image/{name}", defaults: new { controller = "image" });
+            config.Routes.MapHttpRoute(name: "User Authentication", routeTemplate: "api/user/authenticate", defaults: new { controller = "authenticate" });
+            config.Routes.MapHttpRoute(name: "User ", routeTemplate: "api/user/{id}", defaults: new {id = RouteParameter.Optional, controller = "user" });
+            
+            /*config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "_api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
+            );*/
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
             // To avoid processing unexpected or malicious queries, use the validation settings on QueryableAttribute to validate incoming queries.

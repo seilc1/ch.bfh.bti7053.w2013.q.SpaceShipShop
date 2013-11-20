@@ -16,6 +16,11 @@ namespace Uniques.Controllers.Api
             get { return ObjectFactory.GetInstance<AuthenticationSessionProvider>(); }
         }
 
+        public bool Get()
+        {
+            return false;
+        }
+
         public bool Post([FromBody]LoginModelWithEmail loginModel)
         {
             return Provider.Authenticate(loginModel);
