@@ -19,5 +19,7 @@ namespace Uniques.Library.Data
         public DbSet<UserAttribute> UserAttributes { get; set; }
 
         public DbSet<UserAttributeValue> UserAttributeValues { get; set; }
+
+        public DbSet<Image> Images { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Uniques.Library.Authentication
 {
-    public class LoginModelWithUserName
+    public class LoginModel
     {
-        public string Loginname { get; set; }
+        public string Id { get; set; }
 
         public string Password { get; set; }
     }

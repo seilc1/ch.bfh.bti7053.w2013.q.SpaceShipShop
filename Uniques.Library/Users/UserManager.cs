@@ -21,12 +21,12 @@ namespace Uniques.Library.Users
 
         private bool IsEmailUnique(string email)
         {
-            return !_dbContextGetter().Users.All(u => u.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
+            return !_dbContextGetter().Users.Any(u => u.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
         }
 
         private bool IsLoginnameUnique(string loginname)
         {
-            return !_dbContextGetter().UserLogins.All(u => u.Loginname.Equals(loginname, StringComparison.CurrentCultureIgnoreCase));
+            return !_dbContextGetter().UserLogins.Any(u => u.Loginname.Equals(loginname, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public User Add(User user)

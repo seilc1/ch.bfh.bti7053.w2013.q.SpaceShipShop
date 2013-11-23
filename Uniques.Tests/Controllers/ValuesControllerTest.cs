@@ -13,6 +13,9 @@ namespace Uniques.Tests.Controllers
     [TestClass]
     public class ValuesControllerTest
     {
+        /****
+         *  Example Controller Test.
+         * 
         [TestMethod]
         public void Get()
         {
@@ -77,5 +80,7 @@ namespace Uniques.Tests.Controllers
 
             // Assert
         }
+         * 
+         * */
     }
 }

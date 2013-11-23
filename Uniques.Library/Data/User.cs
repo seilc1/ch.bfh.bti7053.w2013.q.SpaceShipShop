@@ -29,7 +29,7 @@ namespace Uniques.Library.Data
         public string Displayname { get; set; }
 
         [Required]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessageResourceType = typeof(Localization.Uniques), ErrorMessageResourceName = "error_email_format")]
+        [RegularExpression(Common.Constants.EmailRegExp, ErrorMessageResourceType = typeof(Localization.Uniques), ErrorMessageResourceName = "error_email_format")]
         public string Email { get; set; }
 
         public DateTime LastAction { get; set; }

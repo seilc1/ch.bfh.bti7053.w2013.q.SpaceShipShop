@@ -35,9 +35,31 @@
 
 @Scripts.Render("~/Scripts/uniques/users.js")
 
+<button id="DeleteUsers">Delete All Users</button>
+
+<script>
+    jQuery(function($) {
+        $("#DeleteUsers").click(function() {
+            $.ajax({ url: "/api/user", type: "delete" });
+        });
+    });
+</script>
+
 
 <form method="POST" action="/api/user/1/image" enctype="multipart/form-data">
     <label for="file">Filename:</label>
-    <input type="file" name="file" id="file"><br>
-    <input type="submit" name="submit" value="Submit">
+    <input type="file" name="file" id="file" /><br>
+    <input type="submit" name="submit" value="Submit" />
 </form>
+
+
+<form method="POST" action="/api/user/authenticate">
+    <label for="Id">Email/Loginname:</label>
+    <input name="Id" id="Id" type="text" />
+
+    <label for="Password">Password:</label>
+    <input name="Password" id="Password" type="Password" />
+
+    <input type="submit" name="submit" value="Submit" />
+</form>
+

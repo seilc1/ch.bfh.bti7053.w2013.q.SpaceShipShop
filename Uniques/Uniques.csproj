@@ -171,7 +171,11 @@
     <Compile Include="Controllers\Api\ImageController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Api\ValuesController.cs" />
+    <Compile Include="DbMigrations\201311231635251_Setup.cs" />
+    <Compile Include="DbMigrations\201311231635251_Setup.Designer.cs">
+      <DependentUpon>201311231635251_Setup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DbMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -303,6 +307,11 @@
       <Project>{E4B6E993-DF0C-46EE-8564-144C4F838608}</Project>
       <Name>Uniques.Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DbMigrations\201311231635251_Setup.resx">
+      <DependentUpon>201311231635251_Setup.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

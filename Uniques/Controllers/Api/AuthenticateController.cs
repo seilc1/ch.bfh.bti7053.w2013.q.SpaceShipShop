@@ -4,12 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.SessionState;
 using StructureMap;
 using Uniques.Library.Authentication;
 
 namespace Uniques.Controllers.Api
 {
-    public class AuthenticateController : ApiController
+    public class AuthenticateController : ApiController, IRequiresSessionState
     {
         private AuthenticationSessionProvider Provider
         {
@@ -21,12 +22,7 @@ namespace Uniques.Controllers.Api
             return false;
         }
 
-        public bool Post([FromBody]LoginModelWithEmail loginModel)
-        {
-            return Provider.Authenticate(loginModel);
-        }
-
-        public bool Post([FromBody]LoginModelWithUserName loginModel)
+        public bool Post([FromBody]LoginModel loginModel)
         {
             return Provider.Authenticate(loginModel);
         }

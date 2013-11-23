@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using StructureMap;
+using Uniques.Library.Authentication;
 using Uniques.Library.StructureMap;
 
 namespace Uniques
@@ -16,6 +17,17 @@ namespace Uniques
 
     public class WebApiApplication : System.Web.HttpApplication
     {
+        public override void Init()
+        {
+            this.AuthenticateRequest += OnAuthenticateRequest;
+            base.Init();
+        }
+
+        private void OnAuthenticateRequest(object sender, EventArgs eventArgs)
+        {
+            ObjectFactory.GetInstance<AuthenticationSessionProvider>().AuthenticateRequest();
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

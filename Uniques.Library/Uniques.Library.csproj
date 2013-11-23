@@ -56,12 +56,13 @@
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationProvider.cs" />
     <Compile Include="Authentication\AuthenticationSessionProvider.cs" />
-    <Compile Include="Authentication\LoginModelWithEmail.cs" />
-    <Compile Include="Authentication\LoginModelWithUserName.cs" />
+    <Compile Include="Authentication\LoginModel.cs" />
+    <Compile Include="Authentication\UniquesIdentity.cs" />
     <Compile Include="Caching\HttpContextCacheRepository.cs" />
     <Compile Include="Caching\ICacheRepository.cs" />
     <Compile Include="Caching\SessionCacheRepository.cs" />
     <Compile Include="Caching\ThreadCacheRepository.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Data\Image.cs" />
     <Compile Include="Data\UniquesDataContext.cs" />
     <Compile Include="Data\User.cs" />

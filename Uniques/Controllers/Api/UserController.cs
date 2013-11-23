@@ -32,5 +32,15 @@ namespace Uniques.Controllers.Api
         {
             return UserManager.Add(user);
         }
+
+        public void Delete()
+        {
+            var uniquesDataContext = ObjectFactory.GetInstance<UniquesDataContext>();
+
+            foreach (var ele in uniquesDataContext.Users.ToList())
+            {
+                uniquesDataContext.Users.Remove(ele);
+            }
+        }
     }
 }
