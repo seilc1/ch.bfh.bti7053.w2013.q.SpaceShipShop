@@ -156,6 +156,7 @@
     <Compile Include="Controllers\Api\AuthenticateController.cs" />
     <Compile Include="Controllers\Api\ImageController.cs" />
     <Compile Include="Controllers\Api\UserAttributesController.cs" />
+    <Compile Include="Controllers\Api\UserAttributeValueController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DbMigrations\201311231635251_Setup.cs" />

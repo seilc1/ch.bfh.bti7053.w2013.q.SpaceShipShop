@@ -15,6 +15,8 @@ namespace Uniques
             config.Routes.MapHttpRoute(name: "User Authentication", routeTemplate: "api/user/authenticate", defaults: new { controller = "authenticate" });
 
             RegisterUserAttributesRoutes(config);
+            RegisterUserAttributeValueRoutes(config);
+
             RegisterUserRoutes(config);
 
             /*config.Routes.MapHttpRoute(
@@ -66,6 +68,21 @@ namespace Uniques
                 name: "User Attributes without id",
                 routeTemplate: "api/user/attributes",
                 defaults: new { controller = "userattributes"});
+        }
+
+        private static void RegisterUserAttributeValueRoutes(HttpConfiguration config)
+        {
+            config.Routes.MapHttpRoute(
+                name: "User Attribute Values by Id",
+                routeTemplate: "api/user/{id}/attributes",
+                defaults: new { controller = "UserAttributeValue" },
+                constraints: new { id = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
+
+            config.Routes.MapHttpRoute(
+                name: "User Attribute Values by name",
+                routeTemplate: "api/user/{name}/attributes",
+                defaults: new { controller = "UserAttributeValue" },
+                constraints: new { name = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"[a-zA-z]+")) });
         }
     }
 }

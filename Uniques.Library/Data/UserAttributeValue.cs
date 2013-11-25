@@ -18,7 +18,6 @@ namespace Uniques.Library.Data
         [MaxLength(255)]
         public string Value { get; set; }
 
-        [Required]
         public UserAttribute AttributeType { get; set; }
     }
 }
