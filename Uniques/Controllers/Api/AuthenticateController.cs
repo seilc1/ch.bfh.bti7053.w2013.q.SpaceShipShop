@@ -19,7 +19,7 @@ namespace Uniques.Controllers.Api
 
         public bool Get()
         {
-            return false;
+            return Provider.Authenticated;
         }
 
         public bool Post([FromBody]LoginModel loginModel)

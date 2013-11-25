@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Rest";
+}
+
+<h2>Rest</h2>
+
+
+<div class="col-container">
+    <div class="col col-6">
+        
+        <h3>REST INPUT</h3>
+        
+        <ul>
+            <li>
+                <label for="action">Action</label>
+                <input type="text" id="action" data-bind="value: action"/>
+            </li>
+            
+            <li>
+                <label for="method">Method</label>
+                <select id="method" data-bind="options: types, value: type"></select>
+            </li>
+            
+            <li>
+                <label for="data">Data</label>
+                <textarea id="data" data-bind="value: data"></textarea>
+            </li>
+            
+            <li>
+                <button data-bind="click: RestCall">Call</button>
+            </li>
+        </ul>
+
+    </div>
+    <div class="col col-6">
+        
+        <h3>REST ANSWER</h3>
+        
+        <label for="answer">Answer</label>
+        <textarea id="answer" data-bind="value: answer"></textarea>
+    </div>
+</div>
+
+<script>
+    var viewModel = {
+        action: ko.observable("action"),
+        data: ko.observable(""),
+        answer: ko.observable("answer"),
+        types: ko.observableArray(['POST', 'GET', 'PUT', 'PUSH', 'DELETE']),
+        type: ko.observable(),
+        RestCall: function ()
+        {
+            var _this = this;
+            var parsedData = jQuery.parseJSON(this.data());
+            console.log(parsedData);
+
+            $.ajax({
+                url: this.action(),
+                type: this.type(),
+                data: parsedData,
+                success: function (data)
+                {
+                _this.RestCallBack(data);
+            }
+            });
+        },
+        RestCallBack: function (data)
+        {
+            this.answer(JSON.stringify(data), null, '\t');
+        }
+    };
+    
+    ko.applyBindings(viewModel);
+</script>

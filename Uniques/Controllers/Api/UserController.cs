@@ -7,6 +7,7 @@ using System.Web.Http;
 using StructureMap;
 using Uniques.Library.Authentication;
 using Uniques.Library.Data;
+using Uniques.Library.Mvc;
 using Uniques.Library.Users;
 
 namespace Uniques.Controllers.Api
@@ -18,14 +19,16 @@ namespace Uniques.Controllers.Api
             get { return ObjectFactory.GetInstance<UserManager>(); }
         }
 
+        [RequiresRouteValues("id")]
         public User Get(int id)
         {
             return UserManager.Get(id);
         }
 
-        public User Get(string displayname)
+        [RequiresRouteValues("loginname")]
+        public User Get(string loginname)
         {
-            return UserManager.Get(displayname);
+            return UserManager.Get(loginname);
         }
 
         public User Put([FromBody]User user)
@@ -33,6 +36,7 @@ namespace Uniques.Controllers.Api
             return UserManager.Add(user);
         }
 
+        [Authorize]
         public void Delete()
         {
             var uniquesDataContext = ObjectFactory.GetInstance<UniquesDataContext>();

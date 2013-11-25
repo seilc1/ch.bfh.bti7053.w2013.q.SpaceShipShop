@@ -12,5 +12,10 @@ namespace Uniques.Controllers
         {
             return View();
         }
+
+        public ActionResult Rest()
+        {
+            return View();
+        }
     }
 }

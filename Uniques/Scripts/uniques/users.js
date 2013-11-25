@@ -8,9 +8,9 @@ Uniques.User = function (ref)
     this.Email = ko.observable("Email");
 
     console.log(ref);
-    this.UserLoader = function () {
+    this.UserLoader = function() {
         return ref;
-    }
+    };
     
     this.Users = ko.observableArray();
 };

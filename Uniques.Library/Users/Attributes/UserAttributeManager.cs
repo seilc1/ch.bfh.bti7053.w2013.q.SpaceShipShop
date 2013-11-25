@@ -66,6 +66,11 @@ namespace Uniques.Library.Users.Attributes
             return UserAttributes.FirstOrDefault(attr => attr.Id == id);
         }
 
+        public UserAttribute GetAttribute(string name)
+        {
+            return UserAttributes.FirstOrDefault(attr => attr.TextKey.Equals(name, StringComparison.CurrentCultureIgnoreCase));
+        }
+
         public UserAttribute PutAttribute(UserAttribute attribute)
         {
             return UserAttributes.Any(attr => attr.Id == attribute.Id)
@@ -102,7 +107,8 @@ namespace Uniques.Library.Users.Attributes
             if (dict.ContainsKey(attribute.Id))
             {
                 var dbContext = _dbContextGetter();
-                dbContext.UserAttributes.Remove(attribute);
+                
+                dbContext.UserAttributes.Remove(dbContext.UserAttributes.First(ua => ua.Id == attribute.Id));
                 dbContext.SaveChanges();
 
                 dict.Remove(attribute.Id);
