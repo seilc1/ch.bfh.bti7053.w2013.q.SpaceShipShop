@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -82,6 +83,10 @@
     <Compile Include="StructureMap\UniqueRegistry.cs" />
     <Compile Include="Users\Attributes\UserAttributeManager.cs" />
     <Compile Include="Users\Attributes\UserAttributeValueManager.cs" />
+    <Compile Include="Users\Images\ImageData.cs" />
+    <Compile Include="Users\Images\UserImageDataManager.cs" />
+    <Compile Include="Users\Images\UserImageManager.cs" />
+    <Compile Include="Users\Images\UserImageTransformer.cs" />
     <Compile Include="Users\UserManager.cs" />
     <Compile Include="Utilities\EncodeHelper.cs" />
     <Compile Include="Utilities\HtmlRemoval.cs" />
