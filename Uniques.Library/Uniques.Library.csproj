@@ -82,6 +82,7 @@
     <Compile Include="StructureMap\UniqueRegistry.cs" />
     <Compile Include="Users\Attributes\UserAttributeManager.cs" />
     <Compile Include="Users\Attributes\UserAttributeValueManager.cs" />
+    <Compile Include="Users\Attributes\UserAttributeValueSet.cs" />
     <Compile Include="Users\UserManager.cs" />
     <Compile Include="Utilities\EncodeHelper.cs" />
     <Compile Include="Utilities\HtmlRemoval.cs" />

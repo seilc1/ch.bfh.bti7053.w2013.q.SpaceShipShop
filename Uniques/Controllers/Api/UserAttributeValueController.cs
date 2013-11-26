@@ -23,23 +23,23 @@ namespace Uniques.Controllers.Api
             get { return ObjectFactory.GetInstance<UserManager>(); }
         }
 
-        public IEnumerable<UserAttributeValue> Get(int id)
+        public IEnumerable<UserAttributeValueSet> Get(int id)
         {
             return AttributeValueManagerManager.GetValues(UserManager.Get(id));
         }
-        
-        public IEnumerable<UserAttributeValue> Get(string loginname)
+
+        public IEnumerable<UserAttributeValueSet> Get(string loginname)
         {
             return AttributeValueManagerManager.GetValues(UserManager.Get(loginname));
         }
 
-        public UserAttributeValue Post(int id, UserAttributeValue value)
+        public UserAttributeValueSet Post(int id, UserAttributeValueSet value)
         {
-            AttributeValueManagerManager.SetValue(value);
+            AttributeValueManagerManager.SetValue(id, value);
             return value;
         }
 
-        public void Delete(int id, UserAttributeValue value)
+        public void Delete(int id, UserAttributeValueSet value)
         {
             AttributeValueManagerManager.DeleteValue(value);
         }
