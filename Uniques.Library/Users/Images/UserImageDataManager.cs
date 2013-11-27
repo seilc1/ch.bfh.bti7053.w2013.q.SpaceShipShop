@@ -25,9 +25,9 @@ namespace Uniques.Library.Users.Images
 
 		public const string ImageFolder = "Images";
 
-		public const string ImagePathFormat = "{0}/{1}.{2}";
+		public const string ImagePathFormat = "{0}\\{1}.{2}";
 
-		public const string ImageFolderPathFormat = "{0}/{1}/{2}";
+		public const string ImageFolderPathFormat = "{0}\\{1}\\{2}";
 
 		public static readonly ImageFormat ImageFormat = ImageFormat.Png;
 
@@ -59,7 +59,7 @@ namespace Uniques.Library.Users.Images
 
 		private string GetUserThumbnailFolder(Data.Image image)
 		{
-			return GetUserImageFolder(image);
+			return GetUserImageFolder(image, true);
 		}
 
 		private string GetThumbnailPath(Data.Image image)
@@ -85,7 +85,7 @@ namespace Uniques.Library.Users.Images
 			var bitmap = FromStream(data);
 
 			_transformer.TransformToThumbnail(bitmap).Save(GetThumbnailPath(image), ImageFormat);
-			_transformer.TranformToImage(bitmap).Save(GetImagePath(image), ImageFormat);
+            _transformer.TranformToImage(bitmap).Save(GetImagePath(image), ImageFormat);
 
 			return image;
 		}

@@ -34,12 +34,12 @@ namespace Uniques.Library.Users.Images
 
 		private Image Get(Guid imageId, UniquesDataContext dbContext)
 		{
-			return dbContext.Images.FirstOrDefault(image => image.FileId == imageId);
+			return dbContext.Images.Include("Owner").FirstOrDefault(image => image.FileId == imageId);
 		}
 
 		private Image Get(int imageId, UniquesDataContext dbContext)
 		{
-			return dbContext.Images.FirstOrDefault(image => image.Id == imageId);
+            return dbContext.Images.Include("Owner").FirstOrDefault(image => image.Id == imageId);
 		}
 
 		public Image Patch(int imageId, string description)
@@ -68,7 +68,7 @@ namespace Uniques.Library.Users.Images
 
 		private Image GetProfilePicture(int userId, UniquesDataContext dbContext)
 		{
-			return dbContext.Images.FirstOrDefault(image => image.Owner.Id == userId && image.IsPortrait);
+            return dbContext.Images.Include("Owner").FirstOrDefault(image => image.Owner.Id == userId && image.IsPortrait);
 		}
 
 		public Image PutProfilePicture(int userId, int newProfileImageId)
@@ -131,6 +131,7 @@ namespace Uniques.Library.Users.Images
 			image.Description = description;
 
 			dbContext.Images.Add(image);
+		    dbContext.SaveChanges();
 
 			_dataManager.Put(image, imageData);
 			return image;
@@ -143,7 +144,7 @@ namespace Uniques.Library.Users.Images
 
 		public ImageData GetThumbnailData(Guid imageId)
 		{
-			return _dataManager.GetAsImage(Get(imageId));
+			return _dataManager.GetAsThumbnail(Get(imageId));
 		}
 
 		public ImageData GetImageData(int imageId)
@@ -153,7 +154,7 @@ namespace Uniques.Library.Users.Images
 
 		public ImageData GetThumbnailData(int imageId)
 		{
-			return _dataManager.GetAsImage(Get(imageId));
+            return _dataManager.GetAsThumbnail(Get(imageId));
 		}
 
 		public ImageData GetImageData(Image image)
@@ -163,7 +164,7 @@ namespace Uniques.Library.Users.Images
 
 		public ImageData GetThumbnailData(Image image)
 		{
-			return _dataManager.GetAsImage(image);
+            return _dataManager.GetAsThumbnail(image);
 		}
 	}
 }

@@ -23,9 +23,9 @@ namespace Uniques.Controllers.Api
             get { return ObjectFactory.GetInstance<UserManager>(); }
         }
 
-        public IEnumerable<UserAttributeValueSet> Get(int id)
+        public IEnumerable<UserAttributeValueSet> Get(int userId)
         {
-            return AttributeValueManagerManager.GetValues(UserManager.Get(id));
+            return AttributeValueManagerManager.GetValues(UserManager.Get(userId));
         }
 
         public IEnumerable<UserAttributeValueSet> Get(string loginname)
@@ -33,13 +33,13 @@ namespace Uniques.Controllers.Api
             return AttributeValueManagerManager.GetValues(UserManager.Get(loginname));
         }
 
-        public UserAttributeValueSet Post(int id, UserAttributeValueSet value)
+        public UserAttributeValueSet Post(int userId, UserAttributeValueSet value)
         {
-            AttributeValueManagerManager.SetValue(id, value);
+            AttributeValueManagerManager.SetValue(userId, value);
             return value;
         }
 
-        public void Delete(int id, UserAttributeValueSet value)
+        public void Delete(int userId, UserAttributeValueSet value)
         {
             AttributeValueManagerManager.DeleteValue(value);
         }

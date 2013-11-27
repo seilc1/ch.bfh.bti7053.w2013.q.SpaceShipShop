@@ -46,9 +46,13 @@
 </script>
 
 
-<form method="POST" action="/api/user/1/image" enctype="multipart/form-data">
+<form method="POST" action="/api/user/1/images" enctype="multipart/form-data">
     <label for="file">Filename:</label>
     <input type="file" name="file" id="file" /><br>
+    
+    <label for="description">Description:</label>
+    <input type="text" name="description" id="description" value="my image" />
+
     <input type="submit" name="submit" value="Submit" />
 </form>
 

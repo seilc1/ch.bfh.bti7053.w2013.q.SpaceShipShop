@@ -19,10 +19,10 @@ namespace Uniques.Controllers.Api
             get { return ObjectFactory.GetInstance<UserManager>(); }
         }
 
-        [RequiresRouteValues("id")]
-        public User Get(int id)
+        [RequiresRouteValues("userId")]
+        public User Get(int userId)
         {
-            return UserManager.Get(id);
+            return UserManager.Get(userId);
         }
 
         [RequiresRouteValues("loginname")]

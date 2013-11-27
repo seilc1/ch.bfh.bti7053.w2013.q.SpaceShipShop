@@ -26,7 +26,7 @@ namespace Uniques.Controllers.Api
 			get { return ObjectFactory.GetInstance<UserImageManager>(); }
 		}
 
-		public async Task<HttpResponseMessage> PostFormData(int userId, string description)
+		public async Task<HttpResponseMessage> PostFormData([FromUri]int userId)
 		{
 			if (!Request.Content.IsMimeMultipartContent())
 			{
@@ -38,7 +38,7 @@ namespace Uniques.Controllers.Api
 
 			if (provider.Contents.Count > 0)
 			{
-				UserImageManager.Put(userId, description, await provider.Contents[0].ReadAsStreamAsync());
+				UserImageManager.Put(userId, "", await provider.Contents[0].ReadAsStreamAsync());
 			}
 
 			return Request.CreateResponse(HttpStatusCode.OK);
@@ -55,24 +55,21 @@ namespace Uniques.Controllers.Api
 		{
 			HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
 
-			using (var result = UserImageManager.GetImageData(userId))
+		    var result = UserImageManager.GetImageData(imageId);
+
+			if (result != null)
 			{
-				if (result != null)
-				{
-					httpResponseMessage.Content = new StreamContent(result.Data);
+				httpResponseMessage.Content = new StreamContent(result.Data);
 
-					httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(result.FileContentType);
-					httpResponseMessage.StatusCode = HttpStatusCode.OK;
-				}
-				else
-				{
-					httpResponseMessage.StatusCode = HttpStatusCode.NotFound;
-				}
-
-				return httpResponseMessage;
+				httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(result.FileContentType);
+				httpResponseMessage.StatusCode = HttpStatusCode.OK;
 			}
+			else
+			{
+				httpResponseMessage.StatusCode = HttpStatusCode.NotFound;
+			}
+
+			return httpResponseMessage;
 		}
-
-
 	}
 }

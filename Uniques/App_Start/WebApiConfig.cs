@@ -11,8 +11,9 @@ namespace Uniques
     {
         public static void Register(HttpConfiguration config)
         {
-            config.Routes.MapHttpRoute(name: "User Image", routeTemplate: "api/user/{id}/image/{name}", defaults: new { controller = "image" });
             config.Routes.MapHttpRoute(name: "User Authentication", routeTemplate: "api/user/authenticate", defaults: new { controller = "authenticate" });
+
+            RegisterUserImageRoutes(config);
 
             RegisterUserAttributesRoutes(config);
             RegisterUserAttributeValueRoutes(config);
@@ -39,9 +40,9 @@ namespace Uniques
         {
             config.Routes.MapHttpRoute(
                 name: "User by Id ",
-                routeTemplate: "api/user/{id}",
+                routeTemplate: "api/user/{userId}",
                 defaults: new { controller = "user" },
-                constraints: new { id = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
+                constraints: new { userId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
 
             config.Routes.MapHttpRoute(
                 name: "User by Loginname",
@@ -74,15 +75,40 @@ namespace Uniques
         {
             config.Routes.MapHttpRoute(
                 name: "User Attribute Values by Id",
-                routeTemplate: "api/user/{id}/attributes",
+                routeTemplate: "api/user/{userId}/attributes",
                 defaults: new { controller = "UserAttributeValue" },
-                constraints: new { id = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
+                constraints: new { userId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
 
             config.Routes.MapHttpRoute(
                 name: "User Attribute Values by name",
                 routeTemplate: "api/user/{name}/attributes",
                 defaults: new { controller = "UserAttributeValue" },
                 constraints: new { name = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"[a-zA-z]+")) });
+        }
+
+        private static void RegisterUserImageRoutes(HttpConfiguration config)
+        {
+            config.Routes.MapHttpRoute(
+                name: "User Image Thumbnail by Id",
+                routeTemplate: "api/user/{userId}/images/{imageId}/thumbnail",
+                defaults: new { controller = "imagethumbnail" },
+                constraints: new { userId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
+
+            config.Routes.MapHttpRoute(
+                name: "User Image by Id",
+                routeTemplate: "api/user/{userId}/images/{imageId}",
+                defaults: new { controller = "image" },
+                constraints: new 
+                { 
+                    userId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")),
+                    imageId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+"))
+                });
+
+            config.Routes.MapHttpRoute(
+                name: "User Image",
+                routeTemplate: "api/user/{userId}/images",
+                defaults: new { controller = "image" },
+                constraints: new { userId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
         }
     }
 }

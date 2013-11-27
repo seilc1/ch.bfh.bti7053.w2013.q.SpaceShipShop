@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,8 @@ namespace Uniques.Library.Users.Images
 
 		private static Image CropImage(Image img, Rectangle cropArea)
 		{
-			Bitmap bmpImage = new Bitmap(img);
-			Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+            Bitmap bmpImage = new Bitmap(img);
+            Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
 			return bmpCrop;
 		}
 
