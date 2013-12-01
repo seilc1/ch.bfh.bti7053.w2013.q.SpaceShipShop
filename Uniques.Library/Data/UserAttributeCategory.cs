@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Uniques.Library.Users.Attributes
+namespace Uniques.Library.Data
 {
-	public class UserAttributeValueSet
+	public class UserAttributeCategory
 	{
 		public int Id { get; set; }
 
-		public string Value { get; set; }
+		public string TextKey { get; set; }
 
-		public int AttributeTypeId { get; set; }
+		public virtual List<UserAttribute> Attributes { get; set; }
 	}
 }

@@ -23,7 +23,7 @@ namespace Uniques.Library.Users.Attributes
         {
             _dbContextGetter = dbContextGetter;
             _cache = cache;
-        }
+        } 
 
         public IEnumerable<UserAttribute> UserAttributes
         {
@@ -40,10 +40,13 @@ namespace Uniques.Library.Users.Attributes
             set { _cache[UserAttributeCacheKey] = value; }
         }
 
-        private Dictionary<int, UserAttribute> LoadUserAttributeDictionary()
-        {
-            return new Dictionary<int, UserAttribute>(_dbContextGetter().UserAttributes.ToDictionary(attr => attr.Id, attr => attr));
-        }
+		private Dictionary<int, UserAttribute> LoadUserAttributeDictionary()
+		{
+			return new Dictionary<int, UserAttribute>(_dbContextGetter()
+					.UserAttributes
+					.Include("Category")
+					.ToDictionary(attr => attr.Id, attr => attr));
+		}
 
         private void SetUserAttributeToCache(UserAttribute attribute)
         {
@@ -60,6 +63,16 @@ namespace Uniques.Library.Users.Attributes
 
             UserAttributeDictionary = dict;
         }
+
+		public IEnumerable<UserAttribute> GetAttributesByCategory(string textKey)
+		{
+			return UserAttributes.Where(attr => attr.Category.TextKey == textKey);
+		}
+
+		public IEnumerable<UserAttribute> GEtAttributesByCategory(int categoryId)
+		{
+			return UserAttributes.Where(attr => attr.CategoryId == categoryId);
+		}
 
         public UserAttribute GetAttribute(int id)
         {
@@ -116,5 +129,29 @@ namespace Uniques.Library.Users.Attributes
                 UserAttributeDictionary = dict;
             }
         }
+
+		public UserAttributeCategory AddAttributeCategory(UserAttributeCategory category)
+		{
+			var dbContext = _dbContextGetter();
+			dbContext.UserAttributeCategories.Add(category);
+			dbContext.SaveChanges();
+
+			return category;
+		}
+
+		public void RemoveAttributeCategory(UserAttributeCategory category)
+		{
+			var dbContext = _dbContextGetter();
+			var attrCategory = dbContext
+								.UserAttributeCategories
+								.FirstOrDefault(cat => cat.Id == category.Id
+													|| cat.TextKey.Equals(category.TextKey, StringComparison.CurrentCultureIgnoreCase));
+
+			if (attrCategory != null)
+			{
+				dbContext.UserAttributeCategories.Remove(attrCategory);
+				dbContext.SaveChanges();
+			}
+		}
     }
 }

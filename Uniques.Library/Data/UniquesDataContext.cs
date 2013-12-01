@@ -16,6 +16,8 @@ namespace Uniques.Library.Data
 
         public DbSet<CompleteUser> CompleteUsers { get; set; }
 
+		public DbSet<UserAttributeCategory> UserAttributeCategories { get; set; }
+
         public DbSet<UserAttribute> UserAttributes { get; set; }
 
         public DbSet<UserAttributeValue> UserAttributeValues { get; set; }
