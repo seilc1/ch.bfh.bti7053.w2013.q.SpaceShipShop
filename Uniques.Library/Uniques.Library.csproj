@@ -66,10 +66,13 @@
     <Compile Include="Caching\ThreadCacheRepository.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Data\Image.cs" />
+    <Compile Include="Data\Translation.cs" />
     <Compile Include="Data\UniquesDataContext.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Data\UserAttribute.cs" />
+    <Compile Include="Data\UserAttributeCategory.cs" />
     <Compile Include="Data\UserAttributeValue.cs" />
+    <Compile Include="Localization\DbTranslationManager.cs" />
     <Compile Include="Localization\Uniques.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -21,7 +21,7 @@ namespace Uniques.Library.Localization
 
 		public string Translate(string key, int lcid)
 		{
-			
+			return key;
 		}
 
 		public string Translate(string key, CultureInfo culture)
