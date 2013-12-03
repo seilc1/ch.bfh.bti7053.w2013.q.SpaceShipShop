@@ -10,26 +10,26 @@ using Uniques.Library.Authentication;
 
 namespace Uniques.Controllers.Api
 {
-    public class AuthenticateController : ApiController, IRequiresSessionState
-    {
-        private AuthenticationSessionProvider Provider
-        {
-            get { return ObjectFactory.GetInstance<AuthenticationSessionProvider>(); }
-        }
+	public class AuthenticateController : ApiController, IRequiresSessionState
+	{
+		private AuthenticationSessionProvider Provider
+		{
+			get { return ObjectFactory.GetInstance<AuthenticationSessionProvider>(); }
+		}
 
-        public bool Get()
-        {
-            return Provider.Authenticated;
-        }
+		public bool Get()
+		{
+			return Provider.Authenticated;
+		}
 
-        public bool Post([FromBody]LoginModel loginModel)
-        {
-            return Provider.Authenticate(loginModel);
-        }
+		public bool Post([FromBody]LoginModel loginModel)
+		{
+			return Provider.Authenticate(loginModel);
+		}
 
-        public void Delete()
-        {
-            Provider.Destroy();
-        }
-    }
+		public void Delete()
+		{
+			Provider.Destroy();
+		}
+	}
 }

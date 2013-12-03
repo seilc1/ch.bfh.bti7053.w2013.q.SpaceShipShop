@@ -165,6 +165,10 @@
     <Compile Include="DbMigrations\201311231635251_Setup.Designer.cs">
       <DependentUpon>201311231635251_Setup.cs</DependentUpon>
     </Compile>
+    <Compile Include="DbMigrations\201312031813318_CategoryAdded.cs" />
+    <Compile Include="DbMigrations\201312031813318_CategoryAdded.Designer.cs">
+      <DependentUpon>201312031813318_CategoryAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="DbMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -290,6 +294,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DbMigrations\201311231635251_Setup.resx">
       <DependentUpon>201311231635251_Setup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DbMigrations\201312031813318_CategoryAdded.resx">
+      <DependentUpon>201312031813318_CategoryAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
