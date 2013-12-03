@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace Uniques.Library.Data
 {
-    public class UniquesDataContext : DbContext
-    {
-        public DbSet<UserLogin> UserLogins { get; set; }
+	public class UniquesDataContext : DbContext
+	{
+		public DbSet<UserLogin> UserLogins { get; set; }
 
-        public DbSet<User> Users { get; set; }
+		public DbSet<User> Users { get; set; }
 
-        public DbSet<CompleteUser> CompleteUsers { get; set; }
+		public DbSet<CompleteUser> CompleteUsers { get; set; }
 
 		public DbSet<UserAttributeCategory> UserAttributeCategories { get; set; }
 
-        public DbSet<UserAttribute> UserAttributes { get; set; }
+		public DbSet<UserAttribute> UserAttributes { get; set; }
 
-        public DbSet<UserAttributeValue> UserAttributeValues { get; set; }
+		public DbSet<UserAttributeValue> UserAttributeValues { get; set; }
 
-        public DbSet<Image> Images { get; set; }
+		public DbSet<Image> Images { get; set; }
 
-		public DbSet<Translation> Translations { get; set; } 
-    }
+		public DbSet<Translation> Translations { get; set; }
+	}
 }

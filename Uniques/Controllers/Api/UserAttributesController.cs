@@ -12,39 +12,46 @@ using Uniques.Library.Users.Attributes;
 
 namespace Uniques.Controllers.Api
 {
-    public class UserAttributesController : ApiController
-    {
-        private UserAttributeManager UserAttributeManager
-        {
-            get { return ObjectFactory.GetInstance<UserAttributeManager>(); }
-        }
+	public class UserAttributesController : ApiController
+	{
+		private UserAttributeManager UserAttributeManager
+		{
+			get { return ObjectFactory.GetInstance<UserAttributeManager>(); }
+		}
 
-        public IEnumerable<UserAttribute> Get()
-        {
-            return UserAttributeManager.UserAttributes;
-        }
+		public IEnumerable<UserAttribute> Get()
+		{
+			return UserAttributeManager.UserAttributes;
+		}
 
-        [RequiresRouteValues("id")]
-        public UserAttribute Get(int id)
-        {
-            return UserAttributeManager.GetAttribute(id);
-        }
+		[HttpGet]
+		[RequiresRouteValues("categoryName")]
+		public IEnumerable<UserAttribute> GetByCategory(string categoryName)
+		{
+			return UserAttributeManager.GetAttributesByCategory(categoryName);
+		}
 
-        [RequiresRouteValues("name")]
-        public UserAttribute Get(string name)
-        {
-            return UserAttributeManager.GetAttribute(name);
-        }
+		[RequiresRouteValues("attributeId")]
+		public UserAttribute Get(int attributeId)
+		{
+			return UserAttributeManager.GetAttribute(attributeId);
+		}
 
-        public UserAttribute Put(UserAttribute userAttribute)
-        {
-            UserAttributeManager.PutAttribute(userAttribute);
-            return userAttribute;
-        }
+		[RequiresRouteValues("attributeName")]
+		public UserAttribute Get(string attributeName)
+		{
+			return UserAttributeManager.GetAttribute(attributeName);
+		}
 
-        public void Delete(UserAttribute userAttribute)
-        {
-            UserAttributeManager.RemoveAttribute(userAttribute);
-        }
-    }
+		public UserAttribute Put(UserAttribute userAttribute)
+		{
+			UserAttributeManager.PutAttribute(userAttribute);
+			return userAttribute;
+		}
+
+		public void Delete(UserAttribute userAttribute)
+		{
+			UserAttributeManager.RemoveAttribute(userAttribute);
+		}
+	}
 }

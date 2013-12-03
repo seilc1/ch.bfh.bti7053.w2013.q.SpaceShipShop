@@ -156,6 +156,7 @@
     <Compile Include="Controllers\Api\AuthenticateController.cs" />
     <Compile Include="Controllers\Api\ImageController.cs" />
     <Compile Include="Controllers\Api\ImageThumbnailController.cs" />
+    <Compile Include="Controllers\Api\UserAttributeCategoriesController.cs" />
     <Compile Include="Controllers\Api\UserAttributesController.cs" />
     <Compile Include="Controllers\Api\UserAttributeValueController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />

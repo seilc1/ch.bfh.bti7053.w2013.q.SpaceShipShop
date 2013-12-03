@@ -7,63 +7,79 @@ using Uniques.Library.Data;
 
 namespace Uniques.Library.Users.Attributes
 {
-    public class UserAttributeValueManager
-    {
-        private readonly Func<UniquesDataContext> _dbContext;
+	public class UserAttributeValueManager
+	{
+		private readonly Func<UniquesDataContext> _dbContext;
 
-        public UserAttributeValueManager(Func<UniquesDataContext> dbContext)
-        {
-            _dbContext = dbContext;
-        }
+		public UserAttributeValueManager(Func<UniquesDataContext> dbContext)
+		{
+			_dbContext = dbContext;
+		}
 
-        public IEnumerable<UserAttributeValueSet> GetValues(User user)
-        {
-            return _dbContext()
-                .UserAttributeValues
-                .Include("AttributeType")
-                .Where(attr => attr.User.Id == user.Id)
-                .Select(attr => new UserAttributeValueSet()
-                                     {
-                                        AttributeTypeId = attr.AttributeType.Id,
-                                        Id = attr.Id,
-                                        Value = attr.Value
-                                     });
-        }
+		public IEnumerable<UserAttributeValueSet> GetValues(User user)
+		{
+			return GetUserAttributeValues(user).Select(Transform);
+		}
 
-        public UserAttributeValueSet SetValue(int userid, UserAttributeValueSet attributeValue)
-        {
-            var dbContext = _dbContext();
+		public IEnumerable<UserAttributeValueSet> GetValues(User user, string categoryName)
+		{
+			return GetUserAttributeValues(user)
+					.Where(attr => attr.AttributeType.Category.TextKey.Equals(categoryName, StringComparison.CurrentCultureIgnoreCase))
+					.Select(Transform);
+		}
 
-            var attribute = dbContext.UserAttributeValues
-                                        .FirstOrDefault(attr => attr.User.Id == userid
-                                                    && attr.AttributeType.Id == attributeValue.AttributeTypeId);
-            if (attribute != null)
-            {
-                attribute.Value = attributeValue.Value;
-            }
-            else
-            {
-                attribute = dbContext.UserAttributeValues.Create();
+		private IQueryable<UserAttributeValue> GetUserAttributeValues(User user)
+		{
+			return _dbContext()
+				.UserAttributeValues
+				.Include("AttributeType")
+				.Where(attr => attr.User.Id == user.Id);
+		}
 
-                attribute.User = dbContext.Users.Single(u => u.Id == userid);
-                attribute.AttributeType = dbContext.UserAttributes.Single(attrType => attrType.Id == attributeValue.AttributeTypeId);
-                attribute.Value = attributeValue.Value;
+		private UserAttributeValueSet Transform(UserAttributeValue dbItem)
+		{
+			return new UserAttributeValueSet()
+						{
+							AttributeTypeId = dbItem.AttributeType.Id,
+							Id = dbItem.Id,
+							Value = dbItem.Value
+						};
+		}
 
-                dbContext.UserAttributeValues.Add(attribute);
-            }
+		public UserAttributeValueSet SetValue(int userid, UserAttributeValueSet attributeValue)
+		{
+			var dbContext = _dbContext();
 
-            dbContext.SaveChanges();
+			var attribute = dbContext.UserAttributeValues
+										.FirstOrDefault(attr => attr.User.Id == userid
+													&& attr.AttributeType.Id == attributeValue.AttributeTypeId);
+			if (attribute != null)
+			{
+				attribute.Value = attributeValue.Value;
+			}
+			else
+			{
+				attribute = dbContext.UserAttributeValues.Create();
 
-            attributeValue.Id = attribute.Id;
+				attribute.User = dbContext.Users.Single(u => u.Id == userid);
+				attribute.AttributeType = dbContext.UserAttributes.Single(attrType => attrType.Id == attributeValue.AttributeTypeId);
+				attribute.Value = attributeValue.Value;
 
-            return attributeValue;
-        }
+				dbContext.UserAttributeValues.Add(attribute);
+			}
 
-        public void DeleteValue(UserAttributeValueSet attributeValue)
-        {
-            var dbContext = _dbContext();
-            dbContext.UserAttributeValues.Remove(dbContext.UserAttributeValues.First(uattr => uattr.Id == attributeValue.Id));
-            dbContext.SaveChanges();
-        }
-    }
+			dbContext.SaveChanges();
+
+			attributeValue.Id = attribute.Id;
+
+			return attributeValue;
+		}
+
+		public void DeleteValue(UserAttributeValueSet attributeValue)
+		{
+			var dbContext = _dbContext();
+			dbContext.UserAttributeValues.Remove(dbContext.UserAttributeValues.First(uattr => uattr.Id == attributeValue.Id));
+			dbContext.SaveChanges();
+		}
+	}
 }

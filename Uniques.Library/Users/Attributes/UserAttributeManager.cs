@@ -13,7 +13,9 @@ namespace Uniques.Library.Users.Attributes
     /// </summary>
     public class UserAttributeManager
     {
-        private const string UserAttributeCacheKey = "__UserAttributeManagerAttributeCache";
+		private const string UserAttributeCacheKey = "__UserAttributeManagerAttributeCache";
+
+		private const string UserAttributeCategoryCacheKey = "__UserAttributeManagerAttributeCategoryCache";
 
         private readonly Func<UniquesDataContext> _dbContextGetter;
 
@@ -30,15 +32,26 @@ namespace Uniques.Library.Users.Attributes
             get { return UserAttributeDictionary.Values; }
         }
 
-        private Dictionary<int, UserAttribute> UserAttributeDictionary
-        {
-            get
-            {
-                return _cache[UserAttributeCacheKey] as Dictionary<int, UserAttribute> 
-                    ?? (_cache[UserAttributeCacheKey] = LoadUserAttributeDictionary()) as Dictionary<int, UserAttribute>;
-            }
-            set { _cache[UserAttributeCacheKey] = value; }
-        }
+		public IEnumerable<UserAttributeCategory> UserAttributeCategories
+		{
+			get
+			{
+				return _cache[UserAttributeCategoryCacheKey] as IEnumerable<UserAttributeCategory> ??
+						(_cache[UserAttributeCategoryCacheKey] = LoadUserAttributeCategory()) as
+						IEnumerable<UserAttributeCategory>;
+			}
+			set { _cache[UserAttributeCategoryCacheKey] = value; }
+		}
+
+		private Dictionary<int, UserAttribute> UserAttributeDictionary
+		{
+			get
+			{
+				return _cache[UserAttributeCacheKey] as Dictionary<int, UserAttribute> 
+					?? (_cache[UserAttributeCacheKey] = LoadUserAttributeDictionary()) as Dictionary<int, UserAttribute>;
+			}
+			set { _cache[UserAttributeCacheKey] = value; }
+		}
 
 		private Dictionary<int, UserAttribute> LoadUserAttributeDictionary()
 		{
@@ -48,28 +61,33 @@ namespace Uniques.Library.Users.Attributes
 					.ToDictionary(attr => attr.Id, attr => attr));
 		}
 
-        private void SetUserAttributeToCache(UserAttribute attribute)
-        {
-            var dict = UserAttributeDictionary;
+		private IEnumerable<UserAttributeCategory> LoadUserAttributeCategory()
+		{
+			return _dbContextGetter().UserAttributeCategories.ToList();
+		}
 
-            if (dict.ContainsKey(attribute.Id))
-            {
-                dict[attribute.Id] = attribute;
-            }
-            else
-            {
-                dict.Add(attribute.Id, attribute);
-            }
+		private void SetUserAttributeToCache(UserAttribute attribute)
+		{
+			var dict = UserAttributeDictionary;
 
-            UserAttributeDictionary = dict;
-        }
+			if (dict.ContainsKey(attribute.Id))
+			{
+				dict[attribute.Id] = attribute;
+			}
+			else
+			{
+				dict.Add(attribute.Id, attribute);
+			}
+
+			UserAttributeDictionary = dict;
+		}
 
 		public IEnumerable<UserAttribute> GetAttributesByCategory(string textKey)
 		{
 			return UserAttributes.Where(attr => attr.Category.TextKey == textKey);
 		}
 
-		public IEnumerable<UserAttribute> GEtAttributesByCategory(int categoryId)
+		public IEnumerable<UserAttribute> GetAttributesByCategory(int categoryId)
 		{
 			return UserAttributes.Where(attr => attr.CategoryId == categoryId);
 		}
@@ -130,28 +148,51 @@ namespace Uniques.Library.Users.Attributes
             }
         }
 
-		public UserAttributeCategory AddAttributeCategory(UserAttributeCategory category)
+		public UserAttributeCategory PutAttributeCategory(UserAttributeCategory category)
 		{
+			var existing = UserAttributeCategories.FirstOrDefault(c => c.Id == category.Id);
 			var dbContext = _dbContextGetter();
-			dbContext.UserAttributeCategories.Add(category);
-			dbContext.SaveChanges();
+
+			if (existing != null)
+			{
+				existing = dbContext.UserAttributeCategories.First(cat => cat.Id == existing.Id);
+				existing.TextKey = category.TextKey;
+
+				dbContext.SaveChanges();
+
+				category = existing;
+			}
+			else
+			{
+				dbContext.UserAttributeCategories.Add(category);
+				dbContext.SaveChanges();
+
+				UserAttributeCategories = new List<UserAttributeCategory>(UserAttributeCategories) { category };
+			}
+
 
 			return category;
 		}
 
 		public void RemoveAttributeCategory(UserAttributeCategory category)
 		{
-			var dbContext = _dbContextGetter();
-			var attrCategory = dbContext
-								.UserAttributeCategories
-								.FirstOrDefault(cat => cat.Id == category.Id
-													|| cat.TextKey.Equals(category.TextKey, StringComparison.CurrentCultureIgnoreCase));
-
-			if (attrCategory != null)
+			var existing = UserAttributeCategories.FirstOrDefault(c => c.Id == category.Id || c.TextKey.Equals(category.TextKey, StringComparison.CurrentCultureIgnoreCase));
+			
+			if (existing != null)
 			{
-				dbContext.UserAttributeCategories.Remove(attrCategory);
-				dbContext.SaveChanges();
+				var dbContext = _dbContextGetter();
+				var attrCategory = dbContext
+									.UserAttributeCategories
+									.FirstOrDefault(cat => cat.Id == existing.Id);
+
+				if (attrCategory != null)
+				{
+					dbContext.UserAttributeCategories.Remove(attrCategory);
+					dbContext.SaveChanges();
+
+					UserAttributeCategories = UserAttributeCategories.Where(cat => cat.Id != existing.Id).ToList();
+				}
 			}
 		}
-    }
+	}
 }
