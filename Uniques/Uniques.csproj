@@ -247,6 +247,7 @@
     <Content Include="Scripts\knockout-3.0.0.debug.js" />
     <Content Include="Scripts\knockout-3.0.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\uniques\objects.js" />
     <Content Include="Scripts\uniques\users.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

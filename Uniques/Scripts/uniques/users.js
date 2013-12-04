@@ -65,5 +65,5 @@ Uniques.UserLoader.prototype = {
 $(function() {
     var userloader = new Uniques.UserLoader();
     userloader.LoadUser();
-    userloader.BindNewUser();
+    // userloader.BindNewUser();
 });

@@ -5,9 +5,14 @@
         <meta name="viewport" content="width=device-width" />
         <title>@ViewBag.Title</title>
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css");
+        
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/Scripts/knockout-3.0.0.js")
+        @Scripts.Render("~/Scripts/knockout.mapping-latest.js")
+        @Scripts.Render("~/Scripts/uniques/objects.js")
         @RenderSection("scripts", required: false)
     </head>
     <body>
@@ -22,7 +27,6 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                            <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
                         </ul>
                     </nav>
                 </div>

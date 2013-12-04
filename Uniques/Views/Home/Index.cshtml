@@ -1,69 +1,135 @@
 ﻿<div id="body">
-    <ul data-bind="foreach: Users">
-        <li>
-            <span data-bind="text: Loginname"></span>
-            <span data-bind="text: Displayname"></span>
-            <span data-bind="text: Password"></span>
-            <span data-bind="text: Email"></span>
-        </li>
-    </ul>
-    
-    <section>
+    <div id="tabs">
+        
         <ul>
-            <li>
-                <label for="loginname">Loginname</label>
-                <input id="loginname" data-bind="value: Loginname"/>
-            </li>
-            <li>
-                <label for="displayname">Displayname</label>
-                <input id="displayname" data-bind="value: Displayname"/>
-            </li>
-            <li>
-                <label for="password">Password</label>
-                <input id="password" type="password" data-bind="value: Password"/>
-            </li>
-            <li>
-                <label for="email">EMail</label>
-                <input id="email" data-bind="value: Email"/>
-            </li>
-            <li>
-                <button data-bind="click: UserLoader().SaveUser">Save User</button>
-            </li>
+            <li><a href="#tabRegister">Register</a></li>
+            <li><a href="#tabLogin">Login</a></li>
+            <li><a href="#tabDelete">Delete</a></li>
+            <li><a href="#tabUpload">Upload</a></li>
+            <li><a href="#tabCat">Admin: Categories</a></li>
         </ul>
-    </section>
+        
+        
+        <div id="tabRegister">
+            <section>
+                <ul>
+                    <li>
+                        <label for="loginname">Loginname</label>
+                        <input id="loginname" data-bind="value: Loginname"/>
+                    </li>
+                    <li>
+                        <label for="displayname">Displayname</label>
+                        <input id="displayname" data-bind="value: Displayname"/>
+                    </li>
+                    <li>
+                        <label for="password">Password</label>
+                        <input id="password" type="password" data-bind="value: Password"/>
+                    </li>
+                    <li>
+                        <label for="email">EMail</label>
+                        <input id="email" data-bind="value: Email"/>
+                    </li>
+                    <li>
+                        <button data-bind="click: UserLoader().SaveUser">Save User</button>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <div id="tabLogin">
+            <form method="POST" action="/api/user/authenticate">
+                <label for="Id">Email/Loginname:</label>
+                <input name="Id" id="Id" type="text" />
+
+                <label for="Password">Password:</label>
+                <input name="Password" id="Password" type="Password" />
+
+                <input type="submit" name="submit" value="Submit" />
+            </form>
+
+        </div>
+
+        <div id="tabDelete">
+            <button id="DeleteUsers">Delete All Users</button>
+
+            <script>
+                jQuery(function ($)
+                {
+                    $("#DeleteUsers").click(function ()
+                    {
+                        $.ajax({ url: "/api/users", type: "delete" });
+                    });
+                });
+            </script>
+        </div>
+
+        <div id="tabUpload">
+            <form method="POST" action="/api/users/1/images" enctype="multipart/form-data">
+                <label for="file">Filename:</label>
+                <input type="file" name="file" id="file" /><br />
+    
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" value="my image" />
+
+                <input type="submit" name="submit" value="Submit" />
+            </form>
+        </div>
+
+        <div id="tabCat">
+            
+            <ul id="categoryList" data-bind="foreach: { data: Categories, as: 'category' }">
+                <li>
+                    <div data-bind="if: Editable">
+                        <input data-bind="value: category.Data.Id" />
+                        <input data-bind="value: category.Data.TextKey" />
+                        
+                        <span data-bind="click: ToggleEdit">
+                            [Save]
+                        </span>
+                    </div>
+
+                    <div data-bind="ifnot: Editable">
+                        <span data-bind="text: category.Data.Id"></span>
+                        <span data-bind="text: category.Data.TextKey"></span>
+                        
+                        <span data-bind="click: ToggleEdit">
+                            [Edit]
+                        </span>
+                    </div>
+                    
+                </li>
+            </ul>
+            
+            <script>
+                $(function ()
+                {
+
+                    $.ajax({
+                        url: "/api/users/attributes/categories",
+                        success: function (data)
+                        {
+                            $(data).each(function ()
+                            {
+                                categoryList.Categories.push(new Uniques.Editable(this));
+                            });
+
+                            ko.applyBindings(categoryList, $("#categoryList")[0]);
+                        }
+                    });
+                });
+
+                var categoryListModel = function ()
+                {
+                    this.Categories = ko.observableArray();
+                };
+
+                var categoryList = new categoryListModel();
+            </script>
+        </div>
+    </div>
+
 </div>
 
 @Scripts.Render("~/Scripts/uniques/users.js")
 
-<button id="DeleteUsers">Delete All Users</button>
-
-<script>
-    jQuery(function($) {
-        $("#DeleteUsers").click(function() {
-            $.ajax({ url: "/api/user", type: "delete" });
-        });
-    });
-</script>
-
-
-<form method="POST" action="/api/user/1/images" enctype="multipart/form-data">
-    <label for="file">Filename:</label>
-    <input type="file" name="file" id="file" /><br>
-    
-    <label for="description">Description:</label>
-    <input type="text" name="description" id="description" value="my image" />
-
-    <input type="submit" name="submit" value="Submit" />
-</form>
-
-
-<form method="POST" action="/api/user/authenticate">
-    <label for="Id">Email/Loginname:</label>
-    <input name="Id" id="Id" type="text" />
-
-    <label for="Password">Password:</label>
-    <input name="Password" id="Password" type="Password" />
-
-    <input type="submit" name="submit" value="Submit" />
-</form>
-
+<script>$(function () { $("#tabs").tabs(); });</script>
