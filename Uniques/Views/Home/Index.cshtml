@@ -37,7 +37,7 @@
         </div>
 
         <div id="tabLogin">
-            <form method="POST" action="/api/user/authenticate">
+            <form method="POST" action="/api/users/authenticate">
                 <label for="Id">Email/Loginname:</label>
                 <input name="Id" id="Id" type="text" />
 
@@ -79,23 +79,24 @@
             
             <ul id="categoryList" data-bind="foreach: { data: Categories, as: 'category' }">
                 <li>
-                    <div data-bind="if: Editable">
-                        <input data-bind="value: category.Data.Id" />
-                        <input data-bind="value: category.Data.TextKey" />
+					<div data-bind="if: category.IsActive">
+						
+						<span data-bind="text: category.Data.Id"></span>
+						<input data-bind="value: category.Data.TextKey" />
                         
-                        <span data-bind="click: ToggleEdit">
-                            [Save]
-                        </span>
-                    </div>
+						<span data-bind="click: $parent.SetInActive">
+							[Save]
+						</span>
+					</div>
 
-                    <div data-bind="ifnot: Editable">
-                        <span data-bind="text: category.Data.Id"></span>
-                        <span data-bind="text: category.Data.TextKey"></span>
+					<div data-bind="ifnot: category.IsActive">
+						<span data-bind="text: category.Data.Id"></span>
+						<span data-bind="text: category.Data.TextKey"></span>
                         
-                        <span data-bind="click: ToggleEdit">
-                            [Edit]
-                        </span>
-                    </div>
+						<span data-bind="click: $parent.SetActive">
+							[Edit]
+						</span>
+					</div>
                     
                 </li>
             </ul>
@@ -120,7 +121,26 @@
 
                 var categoryListModel = function ()
                 {
-                    this.Categories = ko.observableArray();
+	                var _this = this;
+	                this.ActiveNode = ko.observable();
+
+	                this.Categories = ko.observableArray();
+
+	                this.SetActive = function (ele)
+	                {
+	                	if (_this.ActiveNode() != null) {
+	                		_this.ActiveNode().IsActive(false);
+	                	}
+	                	_this.ActiveNode(this);
+		                _this.ActiveNode().IsActive(true);
+		                
+	                };
+
+	                this.SetInActive = function (ele)
+	                {
+	                	_this.ActiveNode().IsActive(false);
+	                	_this.ActiveNode(null);
+	                };
                 };
 
                 var categoryList = new categoryListModel();

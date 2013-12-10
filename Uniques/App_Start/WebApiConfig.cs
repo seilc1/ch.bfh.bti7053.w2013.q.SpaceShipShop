@@ -39,18 +39,24 @@ namespace Uniques
 
         private static void RegisterUserRoutes(HttpConfiguration config)
         {
+			config.Routes.MapHttpRoute(
+				name: "Users by Filter ",
+				routeTemplate: "api/users/{filter}",
+				defaults: new { controller = "user", search = true },
+				constraints: new { filter = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"^where\(.*\)$")) });
+
             config.Routes.MapHttpRoute(
                 name: "User by Id ",
                 routeTemplate: "api/users/{userId}",
                 defaults: new { controller = "user" },
-                constraints: new { userId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"\d+")) });
+                constraints: new { userId = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"^\d+$")) });
 
             config.Routes.MapHttpRoute(
                 name: "User by Loginname",
                 routeTemplate: "api/users/{loginname}",
                 defaults: new { controller = "user" },
-                constraints: new { name = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"[a-zA-z]+")) });
-        }
+				constraints: new { loginname = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"[a-zA-z0-9]+")) });
+		}
 
 		private static void RegisterUserAttributesRoutes(HttpConfiguration config)
 		{
