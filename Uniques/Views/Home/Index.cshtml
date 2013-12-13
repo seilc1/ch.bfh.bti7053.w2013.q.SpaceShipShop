@@ -1,4 +1,5 @@
-﻿<div id="body">
+﻿@using System.Web.Optimization
+<div id="body">
     <div id="tabs">
         
         <ul>
@@ -77,29 +78,37 @@
 
         <div id="tabCat">
             
-            <ul id="categoryList" data-bind="foreach: { data: Categories, as: 'category' }">
-                <li>
-					<div data-bind="if: category.IsActive">
-						
-						<span data-bind="text: category.Data.Id"></span>
-						<input data-bind="value: category.Data.TextKey" />
-                        
-						<span data-bind="click: $parent.SetInActive">
-							[Save]
-						</span>
-					</div>
+			<table id="categoryList">
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Action</th>
+				</tr>
+				<!-- ko foreach: Categories -->
+				
+				<tr data-bind="if: IsActive">
+					<td data-bind="text: Data.Id"></td>
+					<td>
+						<input data-bind="value: Data.TextKey" />
+					</td>
+					<td>
+						<span 
+							class="glyphicon glyphicon-floppy-save"
+							data-bind="click: $parent.SetInActive"></span>
+					</td>
+				</tr>
 
-					<div data-bind="ifnot: category.IsActive">
-						<span data-bind="text: category.Data.Id"></span>
-						<span data-bind="text: category.Data.TextKey"></span>
-                        
-						<span data-bind="click: $parent.SetActive">
-							[Edit]
-						</span>
-					</div>
-                    
-                </li>
-            </ul>
+				<tr data-bind="ifnot: IsActive">
+					<td data-bind="text: Data.Id"></td>
+					<td data-bind="text: Data.TextKey"></td>
+					<td>
+						<span 
+							class="glyphicon glyphicon-cog"
+							data-bind="click: $parent.SetActive"></span>
+					</td>
+				</tr>
+				<!-- /ko -->
+			</table>
             
             <script>
                 $(function ()
