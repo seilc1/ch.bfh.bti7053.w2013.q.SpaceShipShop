@@ -28,8 +28,4 @@ Uniques.Editable = function(data) {
 	this.Editable = ko.observable(false);
 	this.IsActive = ko.observable(false);
     this.Data = data;
-
-    this.ToggleEdit = function() {
-        this.Editable(!this.Editable());
-    };
 };

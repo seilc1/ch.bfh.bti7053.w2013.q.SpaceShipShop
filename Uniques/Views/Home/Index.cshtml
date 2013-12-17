@@ -1,83 +1,83 @@
 ﻿@using System.Web.Optimization
 <div id="body">
-    <div id="tabs">
+	<div id="tabs">
         
-        <ul>
-            <li><a href="#tabRegister">Register</a></li>
-            <li><a href="#tabLogin">Login</a></li>
-            <li><a href="#tabDelete">Delete</a></li>
-            <li><a href="#tabUpload">Upload</a></li>
-            <li><a href="#tabCat">Admin: Categories</a></li>
-        </ul>
+		<ul>
+			<li><a href="#tabRegister">Register</a></li>
+			<li><a href="#tabLogin">Login</a></li>
+			<li><a href="#tabDelete">Delete</a></li>
+			<li><a href="#tabUpload">Upload</a></li>
+			<li><a href="#tabCat">Admin: Categories</a></li>
+			<li><a href="#tabAttributes">Admin: Attributes</a></li>
+		</ul>
         
         
-        <div id="tabRegister">
-            <section>
-                <ul>
-                    <li>
-                        <label for="loginname">Loginname</label>
-                        <input id="loginname" data-bind="value: Loginname"/>
-                    </li>
-                    <li>
-                        <label for="displayname">Displayname</label>
-                        <input id="displayname" data-bind="value: Displayname"/>
-                    </li>
-                    <li>
-                        <label for="password">Password</label>
-                        <input id="password" type="password" data-bind="value: Password"/>
-                    </li>
-                    <li>
-                        <label for="email">EMail</label>
-                        <input id="email" data-bind="value: Email"/>
-                    </li>
-                    <li>
-                        <button data-bind="click: UserLoader().SaveUser">Save User</button>
-                    </li>
-                </ul>
-            </section>
-        </div>
+		<div id="tabRegister">
+			<section>
+				<ul>
+					<li>
+						<label for="loginname">Loginname</label>
+						<input id="loginname" data-bind="value: Loginname"/>
+					</li>
+					<li>
+						<label for="displayname">Displayname</label>
+						<input id="displayname" data-bind="value: Displayname"/>
+					</li>
+					<li>
+						<label for="password">Password</label>
+						<input id="password" type="password" data-bind="value: Password"/>
+					</li>
+					<li>
+						<label for="email">EMail</label>
+						<input id="email" data-bind="value: Email"/>
+					</li>
+					<li>
+						<button data-bind="click: UserLoader().SaveUser">Save User</button>
+					</li>
+				</ul>
+			</section>
+		</div>
 
-        <div id="tabLogin">
-            <form method="POST" action="/api/users/authenticate">
-                <label for="Id">Email/Loginname:</label>
-                <input name="Id" id="Id" type="text" />
+		<div id="tabLogin">
+			<form method="POST" action="/api/users/authenticate">
+				<label for="Id">Email/Loginname:</label>
+				<input name="Id" id="Id" type="text" />
 
-                <label for="Password">Password:</label>
-                <input name="Password" id="Password" type="Password" />
+				<label for="Password">Password:</label>
+				<input name="Password" id="Password" type="Password" />
 
-                <input type="submit" name="submit" value="Submit" />
-            </form>
+				<input type="submit" name="submit" value="Submit" />
+			</form>
 
-        </div>
+		</div>
 
-        <div id="tabDelete">
-            <button id="DeleteUsers">Delete All Users</button>
+		<div id="tabDelete">
+			<button id="DeleteUsers">Delete All Users</button>
 
-            <script>
-                jQuery(function ($)
-                {
-                    $("#DeleteUsers").click(function ()
-                    {
-                        $.ajax({ url: "/api/users", type: "delete" });
-                    });
-                });
-            </script>
-        </div>
+			<script>
+				jQuery(function ($)
+				{
+					$("#DeleteUsers").click(function ()
+					{
+						$.ajax({ url: "/api/users", type: "delete" });
+					});
+				});
+			</script>
+		</div>
 
-        <div id="tabUpload">
-            <form method="POST" action="/api/users/1/images" enctype="multipart/form-data">
-                <label for="file">Filename:</label>
-                <input type="file" name="file" id="file" /><br />
+		<div id="tabUpload">
+			<form method="POST" action="/api/users/1/images" enctype="multipart/form-data">
+				<label for="file">Filename:</label>
+				<input type="file" name="file" id="file" /><br />
     
-                <label for="description">Description:</label>
-                <input type="text" name="description" id="description" value="my image" />
+				<label for="description">Description:</label>
+				<input type="text" name="description" id="description" value="my image" />
 
-                <input type="submit" name="submit" value="Submit" />
-            </form>
-        </div>
+				<input type="submit" name="submit" value="Submit" />
+			</form>
+		</div>
 
-        <div id="tabCat">
-            
+		<div id="tabCat">
 			<table id="categoryList">
 				<tr>
 					<th>Id</th>
@@ -89,12 +89,13 @@
 				<tr data-bind="if: IsActive">
 					<td data-bind="text: Data.Id"></td>
 					<td>
-						<input data-bind="value: Data.TextKey" />
+						<input data-bind="value: Data.TextKey, enterkey: $parent.SetInActive" />
 					</td>
 					<td>
 						<span 
 							class="glyphicon glyphicon-floppy-save"
 							data-bind="click: $parent.SetInActive"></span>
+						<span class="glyphicon glyphicon-remove" data-bind="click: $parent.Delete"></span>
 					</td>
 				</tr>
 
@@ -105,58 +106,96 @@
 						<span 
 							class="glyphicon glyphicon-cog"
 							data-bind="click: $parent.SetActive"></span>
+						<span class="glyphicon glyphicon-remove" data-bind="click: $parent.Delete"></span>
 					</td>
 				</tr>
 				<!-- /ko -->
+				
+				<tr>
+					<td> New:</td>
+					<td>
+						<input data-bind="value: NewNode().TextKey, enterkey: SaveNew" />
+					</td>
+					<td>
+						<span 
+							class="glyphicon glyphicon-floppy-save"
+							data-bind="click: SaveNew"></span>
+					</td>
+				</tr>
 			</table>
-            
-            <script>
-                $(function ()
-                {
 
-                    $.ajax({
-                        url: "/api/users/attributes/categories",
-                        success: function (data)
-                        {
-                            $(data).each(function ()
-                            {
-                                categoryList.Categories.push(new Uniques.Editable(this));
-                            });
+			@Scripts.Render("~/Scripts/uniques/categoryList.js")
+			<script >
+				var categoryList = new CategoryListModel("/api/users/attributes/categories");
+				ko.applyBindings(categoryList, $("#categoryList")[0]);
 
-                            ko.applyBindings(categoryList, $("#categoryList")[0]);
-                        }
-                    });
-                });
+				categoryList.Load();
+			</script>
+		</div>
+	
+		<div id="tabAttributes">
+			<table id="attributeList">
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Default Display</th>
+					<th>Default Description</th>
+					<th>Category</th>
+					<th>Searchable?</th>
+					<th>Action</th>
+				</tr>
+				<!-- ko foreach: Attributes -->
+			
+				<tr>
+					<td data-bind="text: Data.Id"></td>
+					<td data-bind="text: Data.TextKey"></td>
+					<td data-bind="text: Data.DefaultText"></td>
+					<td data-bind="text: Data.DefaultDescription"></td>
+					<td data-bind="text: $parent.ResolveCategory(Data.CategoryId).TextKey"></td>
+					<td data-bind="text: Data.Searchable"></td>
+					<td>
+						<span class="glyphicon glyphicon-cog" data-bind="click: $parent.SetActive"></span>
+						<span class="glyphicon glyphicon-remove" data-bind="click: $parent.Delete"></span>
+					</td>
+				</tr>
 
-                var categoryListModel = function ()
-                {
-	                var _this = this;
-	                this.ActiveNode = ko.observable();
+				<!-- /ko -->
+			
+				<tr>
+					<td> New:</td>
+					<td>
+						<input class="form-control" data-bind="value: NewNode().TextKey" />
+					</td>
+					<td>
+						<input class="form-control" data-bind="value: NewNode().DefaultText" />
+					</td>
+					<td>
+						<input class="form-control" data-bind="value: NewNode().DefaultDescription" />
+					</td>
+					<td>
+						<select data-bind="options: Categories, optionsText: 'TextKey', optionsValue: 'Id', value: NewNode().CategoryId"></select>
+					</td>
+					<td>
+						<input type="radio" data-bind="value: NewNode().Searchable" />
+					</td>
+					<td>
+						<span 
+							class="glyphicon glyphicon-floppy-save"
+							data-bind="click: SaveNew"></span>
+					</td>
+				</tr>
+			</table>
+		
+			@Scripts.Render("~/Scripts/uniques/attributeList.js")
+			<script >
+				var attributeList = new AttributeListModel("/api/users/attributes", "/api/users/attributes/categories");
+				ko.applyBindings(attributeList, $("#attributeList")[0]);
 
-	                this.Categories = ko.observableArray();
-
-	                this.SetActive = function (ele)
-	                {
-	                	if (_this.ActiveNode() != null) {
-	                		_this.ActiveNode().IsActive(false);
-	                	}
-	                	_this.ActiveNode(this);
-		                _this.ActiveNode().IsActive(true);
-		                
-	                };
-
-	                this.SetInActive = function (ele)
-	                {
-	                	_this.ActiveNode().IsActive(false);
-	                	_this.ActiveNode(null);
-	                };
-                };
-
-                var categoryList = new categoryListModel();
-            </script>
-        </div>
-    </div>
-
+				attributeList.Load();
+			</script>
+		</div>
+	
+	</div>
 </div>
 
 @Scripts.Render("~/Scripts/uniques/users.js")
