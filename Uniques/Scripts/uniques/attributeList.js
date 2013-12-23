@@ -77,9 +77,6 @@
 
 	this.Save = function (dataItem)
 	{
-		console.log(dataItem);
-		return;
-
 		$.ajax({
 			url: _baseUrl,
 			data: dataItem.Data,
