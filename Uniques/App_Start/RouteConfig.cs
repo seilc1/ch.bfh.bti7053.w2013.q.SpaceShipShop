@@ -13,6 +13,11 @@ namespace Uniques
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+	        routes.MapRoute(
+		        name: "TemplatePath",
+		        url: "Template/{name}",
+		        defaults: new { controller = "Template", action = "Index" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

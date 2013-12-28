@@ -1,0 +1,12 @@
+﻿@{ Layout = ""; }
+@model Uniques.Models.TemplateModel
+<script type="text/html" id="@Model.TemplateName">
+	@{
+		try
+		{
+			Html.RenderPartial(Model.TemplateName);
+		}
+		catch (InvalidOperationException)
+		{}
+	}
+</script>

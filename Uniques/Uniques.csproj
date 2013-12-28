@@ -178,6 +178,7 @@
     <Compile Include="Controllers\Api\UserAttributeValueController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="DbMigrations\201311231635251_Setup.cs" />
     <Compile Include="DbMigrations\201311231635251_Setup.Designer.cs">
       <DependentUpon>201311231635251_Setup.cs</DependentUpon>
@@ -190,6 +191,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\TemplateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -322,10 +324,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Rest.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Template\Login.ascx" />
+    <Content Include="Views\Template\_base.ascx" />
+    <Content Include="Views\Template\Index.cshtml" />
+    <Content Include="Views\Template\LoggedIn.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
