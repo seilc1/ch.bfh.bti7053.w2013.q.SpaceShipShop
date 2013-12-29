@@ -294,6 +294,7 @@
     <Content Include="Scripts\uniques\categoryList.js" />
     <Content Include="Scripts\uniques\attributeList.js" />
     <Content Include="Scripts\uniques\objects.js" />
+    <Content Include="Scripts\uniques\TemplateEngine.js" />
     <Content Include="Scripts\uniques\users.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -328,6 +329,7 @@
     <Content Include="Views\Template\_base.ascx" />
     <Content Include="Views\Template\Index.cshtml" />
     <Content Include="Views\Template\LoggedIn.ascx" />
+    <Content Include="Views\Template\AdminUserAttributes.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
