@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
+using Newtonsoft.Json;
 using StructureMap;
 using Uniques.Library.Authentication;
 using Uniques.Library.Data;
@@ -31,12 +33,18 @@ namespace Uniques.Controllers.Api
 			return UserManager.Get(loginname);
 		}
 
+		[RequiresRouteValues("filter")]
+		public User Get([FromUriAttribute]string filter, bool search)
+		{
+			return null;
+		}
+
 		public User Put([FromBody]User user)
 		{
 			return UserManager.Add(user);
 		}
 
-		[Authorize]
+		[System.Web.Http.Authorize]
 		public void Delete()
 		{
 			var uniquesDataContext = ObjectFactory.GetInstance<UniquesDataContext>();

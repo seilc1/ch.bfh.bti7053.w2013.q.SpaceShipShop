@@ -1,134 +1,156 @@
-﻿<div id="body">
-    <div id="tabs">
-        
-        <ul>
-            <li><a href="#tabRegister">Register</a></li>
-            <li><a href="#tabLogin">Login</a></li>
-            <li><a href="#tabDelete">Delete</a></li>
-            <li><a href="#tabUpload">Upload</a></li>
-            <li><a href="#tabCat">Admin: Categories</a></li>
-        </ul>
-        
-        
-        <div id="tabRegister">
-            <section>
-                <ul>
-                    <li>
-                        <label for="loginname">Loginname</label>
-                        <input id="loginname" data-bind="value: Loginname"/>
-                    </li>
-                    <li>
-                        <label for="displayname">Displayname</label>
-                        <input id="displayname" data-bind="value: Displayname"/>
-                    </li>
-                    <li>
-                        <label for="password">Password</label>
-                        <input id="password" type="password" data-bind="value: Password"/>
-                    </li>
-                    <li>
-                        <label for="email">EMail</label>
-                        <input id="email" data-bind="value: Email"/>
-                    </li>
-                    <li>
-                        <button data-bind="click: UserLoader().SaveUser">Save User</button>
-                    </li>
-                </ul>
-            </section>
-        </div>
+﻿@using System.Web.Optimization
+<div id="body">
+	<div id="templates"></div>
+	@Scripts.Render("~/Scripts/uniques/TemplateEngine.js")
+	<script>
+		Uniques.TemplateEngine = new Uniques.Classes.TemplateEngine("/Template/", "templates");
+	</script>
 
-        <div id="tabLogin">
-            <form method="POST" action="/api/user/authenticate">
-                <label for="Id">Email/Loginname:</label>
-                <input name="Id" id="Id" type="text" />
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabRegister">Register</a></li>
+			<li><a href="#tabLogin">Login</a></li>
+			<li><a href="#tabDelete">Delete</a></li>
+			<li><a href="#tabUpload">Upload</a></li>
+			<li><a href="#tabCat">Admin: Categories</a></li>
+			<li><a href="#tabAttributes">Admin: Attributes</a></li>
+		</ul>
+		<div id="tabRegister">
+			<section>
+				<ul>
+					<li>
+						<label for="loginname">Loginname</label>
+						<input id="loginname" data-bind="value: Loginname"/>
+					</li>
+					<li>
+						<label for="displayname">Displayname</label>
+						<input id="displayname" data-bind="value: Displayname"/>
+					</li>
+					<li>
+						<label for="password">Password</label>
+						<input id="password" type="password" data-bind="value: Password"/>
+					</li>
+					<li>
+						<label for="email">EMail</label>
+						<input id="email" data-bind="value: Email"/>
+					</li>
+					<li>
+						<button data-bind="click: UserLoader().SaveUser">Save User</button>
+					</li>
+				</ul>
+			</section>
+		</div>
 
-                <label for="Password">Password:</label>
-                <input name="Password" id="Password" type="Password" />
+		<div id="tabLogin">
+			<form method="POST" action="/api/users/authenticate">
+				<label for="Id">Email/Loginname:</label>
+				<input name="Id" id="Id" type="text" />
 
-                <input type="submit" name="submit" value="Submit" />
-            </form>
+				<label for="Password">Password:</label>
+				<input name="Password" id="Password" type="Password" />
 
-        </div>
+				<input type="submit" name="submit" value="Submit" />
+			</form>
 
-        <div id="tabDelete">
-            <button id="DeleteUsers">Delete All Users</button>
+		</div>
 
-            <script>
-                jQuery(function ($)
-                {
-                    $("#DeleteUsers").click(function ()
-                    {
-                        $.ajax({ url: "/api/users", type: "delete" });
-                    });
-                });
-            </script>
-        </div>
+		<div id="tabDelete">
+			<button id="DeleteUsers">Delete All Users</button>
 
-        <div id="tabUpload">
-            <form method="POST" action="/api/users/1/images" enctype="multipart/form-data">
-                <label for="file">Filename:</label>
-                <input type="file" name="file" id="file" /><br />
+			<script>
+				jQuery(function ($)
+				{
+					$("#DeleteUsers").click(function ()
+					{
+						$.ajax({ url: "/api/users", type: "delete" });
+					});
+				});
+			</script>
+		</div>
+
+		<div id="tabUpload">
+			<form method="POST" action="/api/users/1/images" enctype="multipart/form-data">
+				<label for="file">Filename:</label>
+				<input type="file" name="file" id="file" /><br />
     
-                <label for="description">Description:</label>
-                <input type="text" name="description" id="description" value="my image" />
+				<label for="description">Description:</label>
+				<input type="text" name="description" id="description" value="my image" />
 
-                <input type="submit" name="submit" value="Submit" />
-            </form>
-        </div>
+				<input type="submit" name="submit" value="Submit" />
+			</form>
+		</div>
 
-        <div id="tabCat">
-            
-            <ul id="categoryList" data-bind="foreach: { data: Categories, as: 'category' }">
-                <li>
-                    <div data-bind="if: Editable">
-                        <input data-bind="value: category.Data.Id" />
-                        <input data-bind="value: category.Data.TextKey" />
-                        
-                        <span data-bind="click: ToggleEdit">
-                            [Save]
-                        </span>
-                    </div>
+		<div id="tabCat">
+			<table id="categoryList">
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Action</th>
+				</tr>
+				<!-- ko foreach: Categories -->
+				
+				<tr data-bind="if: IsActive">
+					<td data-bind="text: Data.Id"></td>
+					<td>
+						<input data-bind="value: Data.TextKey, enterkey: $parent.SetInActive" />
+					</td>
+					<td>
+						<span 
+							class="glyphicon glyphicon-floppy-save"
+							data-bind="click: $parent.SetInActive"></span>
+						<span class="glyphicon glyphicon-remove" data-bind="click: $parent.Delete"></span>
+					</td>
+				</tr>
 
-                    <div data-bind="ifnot: Editable">
-                        <span data-bind="text: category.Data.Id"></span>
-                        <span data-bind="text: category.Data.TextKey"></span>
-                        
-                        <span data-bind="click: ToggleEdit">
-                            [Edit]
-                        </span>
-                    </div>
-                    
-                </li>
-            </ul>
-            
-            <script>
-                $(function ()
-                {
+				<tr data-bind="ifnot: IsActive">
+					<td data-bind="text: Data.Id"></td>
+					<td data-bind="text: Data.TextKey"></td>
+					<td>
+						<span 
+							class="glyphicon glyphicon-cog"
+							data-bind="click: $parent.SetActive"></span>
+						<span class="glyphicon glyphicon-remove" data-bind="click: $parent.Delete"></span>
+					</td>
+				</tr>
+				<!-- /ko -->
+				
+				<tr>
+					<td> New:</td>
+					<td>
+						<input data-bind="value: NewNode().TextKey, enterkey: SaveNew" />
+					</td>
+					<td>
+						<span 
+							class="glyphicon glyphicon-floppy-save"
+							data-bind="click: SaveNew"></span>
+					</td>
+				</tr>
+			</table>
 
-                    $.ajax({
-                        url: "/api/users/attributes/categories",
-                        success: function (data)
-                        {
-                            $(data).each(function ()
-                            {
-                                categoryList.Categories.push(new Uniques.Editable(this));
-                            });
+			@Scripts.Render("~/Scripts/uniques/categoryList.js")
+			<script >
+				var categoryList = new CategoryListModel("/api/users/attributes/categories");
+				ko.applyBindings(categoryList, $("#categoryList")[0]);
 
-                            ko.applyBindings(categoryList, $("#categoryList")[0]);
-                        }
-                    });
-                });
+				categoryList.Load();
+			</script>
+		</div>
+	
+		<div id="tabAttributes">
+			
+			<div id="userAttributeContainer"></div>
 
-                var categoryListModel = function ()
-                {
-                    this.Categories = ko.observableArray();
-                };
-
-                var categoryList = new categoryListModel();
-            </script>
-        </div>
-    </div>
-
+			@Scripts.Render("~/Scripts/uniques/attributeList.js")
+			<script >
+				var attributeList = new AttributeListModel("/api/users/attributes", "/api/users/attributes/categories");
+				Uniques.TemplateEngine.LoadDataInto(attributeList, "AdminUserAttributes", $("#userAttributeContainer"));
+				attributeList.Load();
+			</script>
+		</div>
+	
+	</div>
 </div>
+
 
 @Scripts.Render("~/Scripts/uniques/users.js")
 
