@@ -22,23 +22,18 @@
         @RenderSection("scripts", required: false)
     </head>
     <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">
-                        <a href="~/">ASP.NET Web API</a>
-                    </p>
-                </div>
-                <div class="float-right">
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        </ul>
-                    </nav>
-                </div>
+        <div class="shell">
+            <header>
+                <h1>Uniques</h1>
+                <h2>The most awesome SocialPortal ever!</h2>
+            </header>
+            <div class="content">
+                @RenderBody()
+        
             </div>
-        </header>
-        @RenderBody()
-    
+            <footer>
+                &copy; 2014 - <a href="mailto:christoph.seiler@gmail.com">Christoph Philipp Seiler</a>
+            </footer>
+        </div>
     </body>
 </html>
