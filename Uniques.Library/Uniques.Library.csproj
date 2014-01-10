@@ -88,6 +88,7 @@
     <Compile Include="Mvc\RequiresRouteValuesAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureMap\UniqueRegistry.cs" />
+    <Compile Include="UniquesContext.cs" />
     <Compile Include="Users\Attributes\UserAttributeManager.cs" />
     <Compile Include="Users\Attributes\UserAttributeValueManager.cs" />
     <Compile Include="Users\Attributes\UserAttributeValueSet.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Users\Images\UserImageDataManager.cs" />
     <Compile Include="Users\Images\UserImageManager.cs" />
     <Compile Include="Users\Images\UserImageTransformer.cs" />
+    <Compile Include="Users\SimpleSearch\SimpleSearchProvider.cs" />
     <Compile Include="Users\UserManager.cs" />
     <Compile Include="Utilities\EncodeHelper.cs" />
     <Compile Include="Utilities\HtmlRemoval.cs" />
