@@ -1,19 +1,13 @@
 ﻿@using System.Web.Optimization
 <div id="body">
-	<div id="templates"></div>
-	@Scripts.Render("~/Scripts/uniques/TemplateEngine.js")
-	<script>
-		Uniques.TemplateEngine = new Uniques.Classes.TemplateEngine("/Template/", "templates");
-	</script>
-
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabRegister">Register</a></li>
 			<li><a href="#tabLogin">Login</a></li>
-			<li><a href="#tabDelete">Delete</a></li>
 			<li><a href="#tabUpload">Upload</a></li>
 			<li><a href="#tabCat">Admin: Categories</a></li>
 			<li><a href="#tabAttributes">Admin: Attributes</a></li>
+			<li><a href="#tabTesting">Testing</a></li>
 		</ul>
 		<div id="tabRegister">
 			<section>
@@ -54,25 +48,11 @@
 
 		</div>
 
-		<div id="tabDelete">
-			<button id="DeleteUsers">Delete All Users</button>
-
-			<script>
-				jQuery(function ($)
-				{
-					$("#DeleteUsers").click(function ()
-					{
-						$.ajax({ url: "/api/users", type: "delete" });
-					});
-				});
-			</script>
-		</div>
-
 		<div id="tabUpload">
 			<form method="POST" action="/api/users/1/images" enctype="multipart/form-data">
 				<label for="file">Filename:</label>
 				<input type="file" name="file" id="file" /><br />
-    
+
 				<label for="description">Description:</label>
 				<input type="text" name="description" id="description" value="my image" />
 
@@ -127,31 +107,43 @@
 				</tr>
 			</table>
 
-			@Scripts.Render("~/Scripts/uniques/categoryList.js")
 			<script >
 				var categoryList = new CategoryListModel("/api/users/attributes/categories");
 				ko.applyBindings(categoryList, $("#categoryList")[0]);
-
 				categoryList.Load();
 			</script>
 		</div>
 	
 		<div id="tabAttributes">
-			
 			<div id="userAttributeContainer"></div>
 
-			@Scripts.Render("~/Scripts/uniques/attributeList.js")
 			<script >
 				var attributeList = new AttributeListModel("/api/users/attributes", "/api/users/attributes/categories");
 				Uniques.TemplateEngine.LoadDataInto(attributeList, "AdminUserAttributes", $("#userAttributeContainer"));
 				attributeList.Load();
 			</script>
 		</div>
-	
+		
+		<div id="tabTesting">
+			<div id="test1">
+				<input type="text" data-bind="value: Name"/>
+				<span data-bind="text : Name"></span>
+			</div>
+			
+			<div id="test2">
+				<input type="text" data-bind="value: Name"/>
+				<span data-bind="text: Name"></span>
+			</div>
+			<script>
+				var myModel = function() {
+					this.Name = ko.observable("Init");
+				};
+				Uniques.DataProvider.SetData("myTestModel", new myModel());
+
+				ko.applyBindings(Uniques.DataProvider.GetData("myTestModel"), $("#test1")[0]);
+				ko.applyBindings(Uniques.DataProvider.GetData("myTestModel"), $("#test2")[0]);
+			</script>
+		</div>
 	</div>
 </div>
-
-
-@Scripts.Render("~/Scripts/uniques/users.js")
-
 <script>$(function () { $("#tabs").tabs(); });</script>

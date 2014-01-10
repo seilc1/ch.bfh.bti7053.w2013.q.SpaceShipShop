@@ -20,10 +20,13 @@ Uniques.Classes.TemplateEngine = function (baseUrl, containerId)
 		return element != null && element != undefined;
 	};
 
-	this.LoadTemplate = function (templateName, onSuccess)
+	this.LoadTemplate = function (templateName, onSuccess, sync)
 	{
+		sync = sync === true;
+		
 		$.ajax({
 			url: _baseUrl + templateName,
+			asnyc: !sync,
 			success: function (answer)
 			{
 				getContainer().append(answer);
@@ -34,6 +37,14 @@ Uniques.Classes.TemplateEngine = function (baseUrl, containerId)
 				}
 			}
 		});
+	};
+
+	this.EnsureTemplateSync = function (templateName)
+	{
+		if (!this.IsTemplateLoaded(templateName))
+		{
+			LoadTemplate(templateName, null, true);
+		}
 	};
 
 	this.LoadDataInto = function (model, templateName, target)

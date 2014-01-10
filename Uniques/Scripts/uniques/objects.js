@@ -45,6 +45,7 @@ Uniques.Page = function ()
         var templateName = currentUser != null && currentUser.Id() != null ? "LoggedIn" : "LoggedOut";
         templateName += targetedUser != null ? "Targeting" : "NotTargeting";
 
+	    Uniques.TemplateEngine.EnsureTemplateSync(templateName);
         return templateName;
     }, this);
 
