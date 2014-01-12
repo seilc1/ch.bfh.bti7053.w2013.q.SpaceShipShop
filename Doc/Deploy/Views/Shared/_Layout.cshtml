@@ -1,0 +1,43 @@
+﻿@using System.Web.Mvc.Html
+@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/themes/base/css")
+        @Styles.Render("~/Content/css")
+        
+		
+		@Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+		@Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/knockout")
+        @Scripts.Render("~/bundles/uniques")
+        @RenderSection("scripts", required: false)
+        
+        <script>
+            Uniques.DataProvider.SetData("UserAttributesCategories", new Uniques.Classes.UserAttributesCategories("/api/users/attributes/categories"));
+            Uniques.DataProvider.SetData("UserAttributes", new Uniques.Classes.UserAttributes("/api/users/attributes", Uniques.DataProvider.GetData("UserAttributesCategories")));
+            Uniques.DataProvider.SetData("UserProfile", new Uniques.Classes.UserProfile("/api/users/{userId}/attributes", "/api/users/{userId}/images", Uniques.DataProvider.GetData("UserAttributesCategories"), Uniques.DataProvider.GetData("UserAttributes")));
+        </script>
+    </head>
+	<body>
+		<div id="templates"></div>
+		<script>Uniques.TemplateEngine = new Uniques.Classes.TemplateEngine("/Template/", "templates");</script>
+		<div class="shell">
+			<header>
+				<h1>Uniques</h1>
+				<h2>The most awesome SocialPortal ever!</h2>
+			</header>
+			<div class="content">
+				@RenderBody()
+			</div>
+			<footer>
+				&copy; 2014 - <a href="mailto:christoph.seiler@gmail.com">Christoph Philipp Seiler</a>
+			</footer>
+		</div>
+	</body>
+</html>

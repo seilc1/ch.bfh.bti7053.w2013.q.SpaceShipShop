@@ -1,0 +1,102 @@
+﻿body, html { height: 100% }
+
+body {
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 82%, #b5a4a4 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(82%,#ffffff), color-stop(100%,#b5a4a4)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 82%,#b5a4a4 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 82%,#b5a4a4 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 82%,#b5a4a4 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 82%,#b5a4a4 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#b5a4a4',GradientType=0 ); /* IE6-9 */
+}
+
+.shell {
+    width: 1024px;
+    margin: 0px auto;
+}
+
+header h1 
+{
+    transform: rotateY(180deg);
+    -webkit-transform: rotateX(180deg);
+    font-size: 56px;
+    font-weight: bold;
+    font-family: Arial;
+    text-transform: uppercase;
+    margin: 0px;
+
+    transition: padding-left 0.5s;
+}
+
+header h1:hover {
+    padding-left: 80px;
+}
+
+header h2
+{
+    margin-top: 0px;
+    font-size: 18px;
+}
+.profile-admin {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.profile-admin > div {
+    float: left;
+    margin-right: 30px;
+}
+
+.profile-images {
+    list-style: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    overflow: hidden;
+    background-color: #E6E6E6;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.profile-images li 
+{
+    float: left;
+    margin: 5px;
+}
+
+.profile-images li:first-child {
+    margin-left: 5px;
+}
+
+.profile-images > li > img {
+    border-radius: 10px 10px 10px 10px;
+}
+
+.profile-infos {
+    list-style: none;
+    margin-left: 0px;
+    padding-left: 5px;
+}
+
+.profile-infos h2 {
+    font-size: 18px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.profile-infos dl dt, .profile-infos dl dd
+{
+    float: left;
+    margin-bottom: 5px;
+    line-height: 24px;
+    height: 20px;
+    font-size: 12px;
+}
+
+.profile-infos dl dt 
+{
+    width: 25%;
+    font-weight: normal;
+}
+.profile-infos dl dd {
+    width: 75%;
+}

@@ -1,0 +1,109 @@
+﻿@using System.Web.Optimization
+<div id="body">
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabRegister">Register</a></li>
+			<li><a href="#tabLogin">Login</a></li>
+			<li><a href="#tabUpload">Upload</a></li>
+			<li><a href="#tabCat">Admin: Categories</a></li>
+			<li><a href="#tabAttributes">Admin: Attributes</a></li>
+			<li><a href="#tabUser">UserProfile</a></li>
+		</ul>
+		<div id="tabRegister">
+            <section id="registerForm">
+                <ul>
+                    <li>
+                        <label for="loginname">Loginname</label>
+                        <input id="loginname" data-bind="value: Loginname"/>
+                    </li>
+                    <li>
+                        <label for="displayname">Displayname</label>
+                        <input id="displayname" data-bind="value: Displayname"/>
+                    </li>
+                    <li>
+                        <label for="password">Password</label>
+                        <input id="password" type="password" data-bind="value: Password"/>
+                    </li>
+                    <li>
+                        <label for="email">EMail</label>
+                        <input id="email" data-bind="value: Email"/>
+                    </li>
+                    <li>
+                        <button data-bind="click: UserLoader().SaveUser">Save User</button>
+                    </li>
+                </ul>
+            </section>
+            
+            <script>
+                jQuery(function($) {
+                    var userLoader = new Uniques.UserLoader();
+                    userLoader.BindNewUser($("#registerForm")[0]);
+                });
+            </script>
+        </div>
+
+		<div id="tabLogin">
+			<form method="POST" action="/api/users/authenticate">
+				<label for="Id">Email/Loginname:</label>
+				<input name="Id" id="Id" type="text" />
+
+				<label for="Password">Password:</label>
+				<input name="Password" id="Password" type="Password" />
+
+				<input type="submit" name="submit" value="Submit" />
+			</form>
+
+		</div>
+
+        <div id="tabUpload">
+            <iframe name="imageTarget" style="display: none;"></iframe>
+            <form method="POST" action="/api/users/1/images" target="imageTarget" id="image-upload-form" enctype="multipart/form-data">
+                
+                <label for="file">Filename:</label>
+                <input type="file" name="file" id="file" /><br />
+                
+                <label for="file">UserId:</label>
+                <input type="text" name="userId" id="userId" /><br />
+
+                <input type="submit" name="submitButton" value="Submit" />
+            </form>
+            <script>
+                jQuery(function($) {
+                    var form = $("#image-upload-form");
+                    form.find("input[type='submit']").click(function (evt)
+                    {
+                        evt.preventDefault();
+                        var userId = form.find("#userId").val();
+                        form.attr("action", "/api/users/" + userId + "/images");
+                        form[0].submit();
+                    });
+                });
+            </script>
+        </div>
+
+		<div id="tabCat">
+	        <div id="userAttributeCategoryContainer"></div>
+
+			<script >
+			    var categoryList = new CategoryListModel(Uniques.DataProvider.GetData("UserAttributesCategories"));
+			    Uniques.TemplateEngine.LoadDataInto(categoryList, "AdminUserAttributeCategories", $("#userAttributeCategoryContainer"));
+			</script>
+		</div>
+	
+        <div id="tabAttributes">
+            <div id="userAttributeContainer"></div>
+            <script>
+                var attributeList = new AttributeListModel(Uniques.DataProvider.GetData("UserAttributes"));
+                Uniques.TemplateEngine.LoadDataInto(attributeList, "AdminUserAttributes", $("#userAttributeContainer"));
+            </script>
+        </div>
+        
+        <div id="tabUser">
+            <div id="userData"></div>
+            <script>
+                Uniques.TemplateEngine.LoadDataInto(Uniques.DataProvider.GetData("UserProfile"), "UserAttributes", $("#userData"));
+            </script>
+        </div>
+    </div>
+</div>
+<script>$(function () { $("#tabs").tabs(); });</script>
