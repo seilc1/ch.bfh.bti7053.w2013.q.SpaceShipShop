@@ -63,7 +63,7 @@
 			<input class="form-control" data-bind="value: NewNode().DefaultDescription" />
 		</td>
 		<td>
-			<select data-bind="options: Categories, optionsText: 'TextKey', optionsValue: 'Data().Id', value: NewNode().CategoryId"></select>
+			<select data-bind="options: Categories, optionsText: 'TextKey', optionsValue: 'Id', value: NewNode().CategoryId"></select>
 		</td>
 		<td>
 			<input type="checkbox" data-bind="checked: NewNode().Searchable" />

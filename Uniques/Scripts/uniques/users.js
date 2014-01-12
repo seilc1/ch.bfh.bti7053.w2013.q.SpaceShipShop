@@ -7,7 +7,6 @@ Uniques.User = function (ref)
     this.Password = ko.observable("Password");
     this.Email = ko.observable("Email");
 
-    console.log(ref);
     this.UserLoader = function() {
         return ref;
     };
@@ -30,22 +29,14 @@ Uniques.UserLoader.prototype = {
     },
     LoadUserCallBack: function (data)
     {
-        var d = $(data);
-        console.log(d);
-
-        d.each(function (key, item)
-        {
-            console.log(item);
-            _user.Users.push(item);
-        });
     },
-    BindNewUser: function () {
+    BindNewUser: function (htmlElement)
+    {
         _user = new Uniques.User(this);
-        ko.applyBindings(_user);
+        ko.applyBindings(_user, htmlElement);
     },
     SaveUser: function ()
     {
-        console.log(_user);
         $.ajax({
             url: "/api/users",
             type: "PUT",
@@ -61,9 +52,3 @@ Uniques.UserLoader.prototype = {
         });
     }
 };
-
-$(function() {
-    var userloader = new Uniques.UserLoader();
-    userloader.LoadUser();
-    // userloader.BindNewUser();
-});

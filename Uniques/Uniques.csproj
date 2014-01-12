@@ -273,8 +273,10 @@
     <Content Include="Scripts\uniques\TemplateEngine.js" />
     <Content Include="Scripts\uniques\UserAttributes.js" />
     <Content Include="Scripts\uniques\UserAttributesCategories.js" />
+    <Content Include="Scripts\uniques\UserProfile.js" />
     <Content Include="Scripts\uniques\users.js" />
     <Content Include="Views\Template\AdminUserAttributeCategories.ascx" />
+    <Content Include="Views\Template\UserAttributes.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

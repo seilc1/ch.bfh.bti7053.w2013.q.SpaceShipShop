@@ -36,6 +36,11 @@ namespace Uniques.Library.Users
 
         public MinimalUser Reduce(User user)
         {
+            if (user == null)
+            {
+                return new MinimalUser();
+            }
+
             return new MinimalUser
                 {
                     Displayname = user.Displayname,

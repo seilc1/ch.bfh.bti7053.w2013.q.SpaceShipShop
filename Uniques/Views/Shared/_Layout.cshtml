@@ -21,6 +21,7 @@
         <script>
             Uniques.DataProvider.SetData("UserAttributesCategories", new Uniques.Classes.UserAttributesCategories("/api/users/attributes/categories"));
             Uniques.DataProvider.SetData("UserAttributes", new Uniques.Classes.UserAttributes("/api/users/attributes", Uniques.DataProvider.GetData("UserAttributesCategories")));
+            Uniques.DataProvider.SetData("UserProfile", new Uniques.Classes.UserProfile("/api/users/{userId}/attributes", "/api/users/{userId}/images", Uniques.DataProvider.GetData("UserAttributesCategories"), Uniques.DataProvider.GetData("UserAttributes")));
         </script>
     </head>
 	<body>

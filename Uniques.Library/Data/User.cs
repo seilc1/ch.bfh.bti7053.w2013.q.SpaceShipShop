@@ -23,7 +23,6 @@ namespace Uniques.Library.Data
         [Required]
         public string PasswordSalt { get; set; }
 
-        [Required]
         [DefaultValue(false)]
         public bool IsAdmin { get; set; }
     }

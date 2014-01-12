@@ -55,9 +55,18 @@ namespace Uniques.Library.Users.Attributes
 													&& attr.AttributeType.Id == attributeValue.AttributeTypeId);
 			if (attribute != null)
 			{
-				attribute.Value = attributeValue.Value;
+                if (!string.IsNullOrEmpty(attributeValue.Value))
+                {
+                    attribute.Value = attributeValue.Value;
+                }
+                else
+                {
+                    DeleteValue(attributeValue);
+                    return null;
+                }
+                
 			}
-			else
+			else if (!string.IsNullOrEmpty(attributeValue.Value))
 			{
 				attribute = dbContext.UserAttributeValues.Create();
 
@@ -66,6 +75,10 @@ namespace Uniques.Library.Users.Attributes
 				attribute.Value = attributeValue.Value;
 
 				dbContext.UserAttributeValues.Add(attribute);
+			}
+			else
+			{
+			    return null;
 			}
 
 			dbContext.SaveChanges();

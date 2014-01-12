@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -74,9 +75,16 @@ namespace Uniques.Library.Authentication
 
             if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
             {
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
-                GenericPrincipal prin = new GenericPrincipal(new GenericIdentity(ticket.Name), null);
-                HttpContext.Current.User = prin;
+                try
+                {
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+                    GenericPrincipal prin = new GenericPrincipal(new GenericIdentity(ticket.Name), null);
+                    HttpContext.Current.User = prin;
+                }
+                catch (CryptographicException)
+                {
+                    FormsAuthentication.SignOut();
+                }
             }
         }
     }

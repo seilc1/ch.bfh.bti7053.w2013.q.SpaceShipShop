@@ -11,8 +11,6 @@ Uniques.Classes.UserAttributes = function (baseUrl, categories)
     this.AttributeList = ko.observableArray();
     this.Categories = categories;
 
-    console.log(this.Categories);
-
     this.Load = function ()
     {
         $.ajax({
@@ -27,9 +25,17 @@ Uniques.Classes.UserAttributes = function (baseUrl, categories)
                     var item = this;
                     this.CategoryName = ko.computed(function ()
                     {
-                        return _this.ResolveCategory(item.CategoryId).TextKey();
+                        var cat = _this.ResolveCategory(item.CategoryId);
+                        
+                        if (cat != null) {
+                            return cat.TextKey();
+                        }
+                        else
+                        {
+                            return "-- Not Set --";
+                        }
                     });
-                    _this.AttributeList.push(new Uniques.Editable(ko.mapping.fromJS(this)));
+                   _this.AttributeList.push(new Uniques.Editable(ko.mapping.fromJS(this)));
                 });
             }
         });
@@ -64,8 +70,22 @@ Uniques.Classes.UserAttributes = function (baseUrl, categories)
             url: _baseUrl,
             data: newNode,
             type: "PUT",
-            success: function(data) {
-                _this.AttributeList.push(new Uniques.Editable(data));
+            success: function (data)
+            {
+                data.CategoryName = ko.computed(function ()
+                {
+                    var cat = _this.ResolveCategory(item.CategoryId);
+
+                    if (cat != null)
+                    {
+                        return cat.TextKey();
+                    }
+                    else
+                    {
+                        return "-- Not Set --";
+                    }
+                });
+                _this.AttributeList.push(new Uniques.Editable(ko.mapping.fromJS(data)));
                 newNode = new Uniques.UserAttribute();
             }
         });
