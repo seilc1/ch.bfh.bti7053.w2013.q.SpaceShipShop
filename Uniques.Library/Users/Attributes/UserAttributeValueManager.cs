@@ -16,19 +16,19 @@ namespace Uniques.Library.Users.Attributes
 			_dbContext = dbContext;
 		}
 
-		public IEnumerable<UserAttributeValueSet> GetValues(User user)
+		public IEnumerable<UserAttributeValueSet> GetValues(MinimalUser user)
 		{
 			return GetUserAttributeValues(user).Select(Transform);
 		}
 
-		public IEnumerable<UserAttributeValueSet> GetValues(User user, string categoryName)
+        public IEnumerable<UserAttributeValueSet> GetValues(MinimalUser user, string categoryName)
 		{
 			return GetUserAttributeValues(user)
 					.Where(attr => attr.AttributeType.Category.TextKey.Equals(categoryName, StringComparison.CurrentCultureIgnoreCase))
 					.Select(Transform);
 		}
 
-		private IQueryable<UserAttributeValue> GetUserAttributeValues(User user)
+        private IQueryable<UserAttributeValue> GetUserAttributeValues(MinimalUser user)
 		{
 			return _dbContext()
 				.UserAttributeValues

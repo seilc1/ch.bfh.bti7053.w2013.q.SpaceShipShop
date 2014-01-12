@@ -41,9 +41,9 @@ namespace Uniques
         {
 			config.Routes.MapHttpRoute(
 				name: "Users by Filter ",
-				routeTemplate: "api/users/{filter}",
-				defaults: new { controller = "user", search = true },
-				constraints: new { filter = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"^where\(.*\)$")) });
+				routeTemplate: "api/users/{searchterm}",
+				defaults: new { controller = "search" },
+                constraints: new { searchterm = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"^where\(.*\)$")) });
 
             config.Routes.MapHttpRoute(
                 name: "User by Id ",
@@ -55,7 +55,12 @@ namespace Uniques
                 name: "User by Loginname",
                 routeTemplate: "api/users/{loginname}",
                 defaults: new { controller = "user" },
-				constraints: new { loginname = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"[a-zA-z0-9]+")) });
+                constraints: new { loginname = new MultiConstraint(new NotNullConstraint(), new RegexConstraint(@"[a-zA-z0-9]+")) });
+
+            config.Routes.MapHttpRoute(
+                name: "Users ",
+                routeTemplate: "api/users/",
+                defaults: new { controller = "user", });
 		}
 
 		private static void RegisterUserAttributesRoutes(HttpConfiguration config)

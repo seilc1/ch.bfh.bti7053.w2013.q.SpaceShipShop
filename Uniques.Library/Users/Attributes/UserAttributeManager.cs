@@ -125,7 +125,13 @@ namespace Uniques.Library.Users.Attributes
             var dbContext = _dbContextGetter();
 
             var dbAttr = dbContext.UserAttributes.Single(attr => attr.Id == attribute.Id);
-            dbAttr = attribute;
+
+            dbAttr.Searchable = attribute.Searchable;
+            dbAttr.Category = attribute.Category;
+            dbAttr.DefaultText = attribute.DefaultText;
+            dbAttr.DefaultDescription = attribute.DefaultDescription;
+            dbAttr.TextKey = attribute.TextKey;
+
             dbContext.SaveChanges();
             SetUserAttributeToCache(dbAttr);
 

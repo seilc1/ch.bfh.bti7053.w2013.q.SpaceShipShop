@@ -7,7 +7,6 @@
 			<li><a href="#tabUpload">Upload</a></li>
 			<li><a href="#tabCat">Admin: Categories</a></li>
 			<li><a href="#tabAttributes">Admin: Attributes</a></li>
-			<li><a href="#tabTesting">Testing</a></li>
 		</ul>
 		<div id="tabRegister">
 			<section>
@@ -61,87 +60,19 @@
 		</div>
 
 		<div id="tabCat">
-			<table id="categoryList">
-				<tr>
-					<th>Id</th>
-					<th>Name</th>
-					<th>Action</th>
-				</tr>
-				<!-- ko foreach: Categories -->
-				
-				<tr data-bind="if: IsActive">
-					<td data-bind="text: Data.Id"></td>
-					<td>
-						<input data-bind="value: Data.TextKey, enterkey: $parent.SetInActive" />
-					</td>
-					<td>
-						<span 
-							class="glyphicon glyphicon-floppy-save"
-							data-bind="click: $parent.SetInActive"></span>
-						<span class="glyphicon glyphicon-remove" data-bind="click: $parent.Delete"></span>
-					</td>
-				</tr>
-
-				<tr data-bind="ifnot: IsActive">
-					<td data-bind="text: Data.Id"></td>
-					<td data-bind="text: Data.TextKey"></td>
-					<td>
-						<span 
-							class="glyphicon glyphicon-cog"
-							data-bind="click: $parent.SetActive"></span>
-						<span class="glyphicon glyphicon-remove" data-bind="click: $parent.Delete"></span>
-					</td>
-				</tr>
-				<!-- /ko -->
-				
-				<tr>
-					<td> New:</td>
-					<td>
-						<input data-bind="value: NewNode().TextKey, enterkey: SaveNew" />
-					</td>
-					<td>
-						<span 
-							class="glyphicon glyphicon-floppy-save"
-							data-bind="click: SaveNew"></span>
-					</td>
-				</tr>
-			</table>
+	        <div id="userAttributeCategoryContainer"></div>
 
 			<script >
-				var categoryList = new CategoryListModel("/api/users/attributes/categories");
-				ko.applyBindings(categoryList, $("#categoryList")[0]);
-				categoryList.Load();
+			    var categoryList = new CategoryListModel(Uniques.DataProvider.GetData("UserAttributesCategories"));
+			    Uniques.TemplateEngine.LoadDataInto(categoryList, "AdminUserAttributeCategories", $("#userAttributeCategoryContainer"));
 			</script>
 		</div>
 	
 		<div id="tabAttributes">
-			<div id="userAttributeContainer"></div>
-
-			<script >
-				var attributeList = new AttributeListModel("/api/users/attributes", "/api/users/attributes/categories");
+            <div id="userAttributeContainer"></div>
+            <script>
+			    var attributeList = new AttributeListModel(Uniques.DataProvider.GetData("UserAttributes"));
 				Uniques.TemplateEngine.LoadDataInto(attributeList, "AdminUserAttributes", $("#userAttributeContainer"));
-				attributeList.Load();
-			</script>
-		</div>
-		
-		<div id="tabTesting">
-			<div id="test1">
-				<input type="text" data-bind="value: Name"/>
-				<span data-bind="text : Name"></span>
-			</div>
-			
-			<div id="test2">
-				<input type="text" data-bind="value: Name"/>
-				<span data-bind="text: Name"></span>
-			</div>
-			<script>
-				var myModel = function() {
-					this.Name = ko.observable("Init");
-				};
-				Uniques.DataProvider.SetData("myTestModel", new myModel());
-
-				ko.applyBindings(Uniques.DataProvider.GetData("myTestModel"), $("#test1")[0]);
-				ko.applyBindings(Uniques.DataProvider.GetData("myTestModel"), $("#test2")[0]);
 			</script>
 		</div>
 	</div>

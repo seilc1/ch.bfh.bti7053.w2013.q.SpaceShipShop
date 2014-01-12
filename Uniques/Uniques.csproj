@@ -159,6 +159,7 @@
     <Compile Include="Controllers\Api\AuthenticateController.cs" />
     <Compile Include="Controllers\Api\ImageController.cs" />
     <Compile Include="Controllers\Api\ImageThumbnailController.cs" />
+    <Compile Include="Controllers\Api\SearchController.cs" />
     <Compile Include="Controllers\Api\UserAttributeCategoriesController.cs" />
     <Compile Include="Controllers\Api\UserAttributesController.cs" />
     <Compile Include="Controllers\Api\UserAttributeValueController.cs" />
@@ -270,7 +271,10 @@
     <Content Include="Scripts\uniques\DataProvider.js" />
     <Content Include="Scripts\uniques\objects.js" />
     <Content Include="Scripts\uniques\TemplateEngine.js" />
+    <Content Include="Scripts\uniques\UserAttributes.js" />
+    <Content Include="Scripts\uniques\UserAttributesCategories.js" />
     <Content Include="Scripts\uniques\users.js" />
+    <Content Include="Views\Template\AdminUserAttributeCategories.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

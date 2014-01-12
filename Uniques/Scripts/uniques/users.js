@@ -26,7 +26,7 @@ Uniques.UserLoader = function() {
 Uniques.UserLoader.prototype = {
     _user: null,
     LoadUser: function() {
-        $.ajax({ url: "/api/user", type: "GET", success: this.LoadUserCallBack });
+        $.ajax({ url: "/api/users", type: "GET", success: this.LoadUserCallBack });
     },
     LoadUserCallBack: function (data)
     {
@@ -47,7 +47,7 @@ Uniques.UserLoader.prototype = {
     {
         console.log(_user);
         $.ajax({
-            url: "/api/user",
+            url: "/api/users",
             type: "PUT",
             data: _user,
             error: function (response)

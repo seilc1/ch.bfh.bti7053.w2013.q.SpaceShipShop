@@ -21,22 +21,27 @@ namespace Uniques.Controllers.Api
 			get { return ObjectFactory.GetInstance<UserManager>(); }
 		}
 
+        public HttpResponseMessage Get()
+        {
+            return this.Request.CreateResponse(
+                HttpStatusCode.OK,
+                new 
+                    {
+                        Desc = "Get specific User by 'Loginname' or 'UserId' or search for an User by a value with 'where(value)'",
+                        Users = UserManager.All
+                    });
+        }
+
 		[RequiresRouteValues("userId")]
-		public User Get(int userId)
+		public MinimalUser Get(int userId)
 		{
 			return UserManager.Get(userId);
 		}
 
 		[RequiresRouteValues("loginname")]
-		public User Get(string loginname)
+        public MinimalUser Get(string loginname)
 		{
 			return UserManager.Get(loginname);
-		}
-
-		[RequiresRouteValues("filter")]
-		public User Get([FromUriAttribute]string filter, bool search)
-		{
-			return null;
 		}
 
 		public User Put([FromBody]User user)

@@ -70,6 +70,7 @@
     <Compile Include="Caching\ThreadCacheRepository.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Data\Image.cs" />
+    <Compile Include="Data\MinimalUser.cs" />
     <Compile Include="Data\Translation.cs" />
     <Compile Include="Data\UniquesDataContext.cs" />
     <Compile Include="Data\User.cs" />

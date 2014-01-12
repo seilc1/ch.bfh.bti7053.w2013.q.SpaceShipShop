@@ -11,6 +11,7 @@ using Uniques.Library.Data;
 using Uniques.Library.Users;
 using Uniques.Library.Users.Attributes;
 using Uniques.Library.Users.Images;
+using Uniques.Library.Users.SimpleSearch;
 
 namespace Uniques.Library.StructureMap
 {
@@ -29,7 +30,7 @@ namespace Uniques.Library.StructureMap
 			
 			// user bindings.
 			For<UserManager>().Use<UserManager>();
-			For<UserAttributeManager>().Singleton().Use<UserAttributeManager>()
+			For<UserAttributeManager>().Use<UserAttributeManager>()
 				.Ctor<ICacheRepository>("cache").Is(ctx => ctx.GetInstance<ICacheRepository>("Singleton"));
 			For<UserAttributeValueManager>().Use<UserAttributeValueManager>();
 
@@ -43,6 +44,8 @@ namespace Uniques.Library.StructureMap
 			For<UserImageTransformer>().Use<UserImageTransformer>();
 			For<UserImageDataManager>().Use<UserImageDataManager>()
 				.Ctor<string>("basePath").Is(HttpContext.Current.Server.MapPath("~/App_Data"));
+
+            For<SimpleSearchProvider>().Singleton().Use<SimpleSearchProvider>();
 		}
 	}
 }

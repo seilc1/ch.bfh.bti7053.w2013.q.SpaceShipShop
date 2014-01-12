@@ -17,6 +17,11 @@
         @Scripts.Render("~/bundles/knockout")
         @Scripts.Render("~/bundles/uniques")
         @RenderSection("scripts", required: false)
+        
+        <script>
+            Uniques.DataProvider.SetData("UserAttributesCategories", new Uniques.Classes.UserAttributesCategories("/api/users/attributes/categories"));
+            Uniques.DataProvider.SetData("UserAttributes", new Uniques.Classes.UserAttributes("/api/users/attributes", Uniques.DataProvider.GetData("UserAttributesCategories")));
+        </script>
     </head>
 	<body>
 		<div id="templates"></div>

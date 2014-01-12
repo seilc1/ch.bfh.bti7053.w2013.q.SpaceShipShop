@@ -26,10 +26,13 @@ Uniques.UserAttribute = function ()
     this.CategoryId = ko.observable();
 };
 
-Uniques.Editable = function(data) {
-	this.Editable = ko.observable(false);
-	this.IsActive = ko.observable(false);
-    this.Data = data;
+Uniques.Editable = function (data)
+{
+    data.Editable = ko.observable(false);
+    data.IsActive = ko.observable(false);
+    data.Data = jQuery.extend({}, data);
+
+    return data;
 };
 
 Uniques.Page = function ()

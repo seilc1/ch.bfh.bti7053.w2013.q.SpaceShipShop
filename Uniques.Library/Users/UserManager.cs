@@ -19,6 +19,11 @@ namespace Uniques.Library.Users
             _authProvider = authProvider;
         }
 
+        public object All
+        {
+            get { return _dbContextGetter().Users.Select(Reduce); }
+        }
+
         private bool IsEmailUnique(string email)
         {
             return !_dbContextGetter().Users.Any(u => u.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
@@ -27,6 +32,18 @@ namespace Uniques.Library.Users
         private bool IsLoginnameUnique(string loginname)
         {
             return !_dbContextGetter().UserLogins.Any(u => u.Loginname.Equals(loginname, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        public MinimalUser Reduce(User user)
+        {
+            return new MinimalUser
+                {
+                    Displayname = user.Displayname,
+                    Id = user.Id,
+                    LastAction = user.LastAction,
+                    Loginname = user.Loginname,
+                    IsAdmin = user.IsAdmin
+                };
         }
 
         public User Add(User user)
@@ -53,14 +70,14 @@ namespace Uniques.Library.Users
             return user;
         }
 
-        public User Get(int id)
+        public MinimalUser Get(int id)
         {
-            return _dbContextGetter().Users.FirstOrDefault(u => u.Id == id);
+            return Reduce(_dbContextGetter().Users.FirstOrDefault(u => u.Id == id));
         }
 
-        public User Get(string displayname)
+        public MinimalUser Get(string displayname)
         {
-            return _dbContextGetter().Users.FirstOrDefault(u => u.Displayname == displayname);
+            return Reduce(_dbContextGetter().Users.FirstOrDefault(u => u.Displayname == displayname));
         }
     }
 }
