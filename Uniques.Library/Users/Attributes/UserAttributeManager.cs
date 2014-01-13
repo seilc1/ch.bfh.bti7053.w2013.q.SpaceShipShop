@@ -127,7 +127,7 @@ namespace Uniques.Library.Users.Attributes
             var dbAttr = dbContext.UserAttributes.Single(attr => attr.Id == attribute.Id);
 
             dbAttr.Searchable = attribute.Searchable;
-            dbAttr.Category = attribute.Category;
+            dbAttr.CategoryId= attribute.CategoryId;
             dbAttr.DefaultText = attribute.DefaultText;
             dbAttr.DefaultDescription = attribute.DefaultDescription;
             dbAttr.TextKey = attribute.TextKey;
@@ -194,9 +194,8 @@ namespace Uniques.Library.Users.Attributes
 				if (attrCategory != null)
 				{
 					dbContext.UserAttributeCategories.Remove(attrCategory);
-					dbContext.SaveChanges();
 
-					UserAttributeCategories = UserAttributeCategories.Where(cat => cat.Id != existing.Id).ToList();
+					dbContext.SaveChanges();
 				}
 			}
 		}
